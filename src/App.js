@@ -13,7 +13,7 @@ import "react-datepicker/dist/react-datepicker.css";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter  basename="/terrace-peaks">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/rooms" element={<Rooms />} />

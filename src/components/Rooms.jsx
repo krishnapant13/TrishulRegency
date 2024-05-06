@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import DatePicker from "react-datepicker";
-import roomData from "../rooms.json";
 import NewsLetter from "./NewsLetter";
 import Footer from "./Footer";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
+import axios from "axios";
+import { server } from "../server";
 
 const Rooms = () => {
   const [checkInDate, setCheckInDate] = useState("");
@@ -14,11 +15,20 @@ const Rooms = () => {
   const [guestCount, setGuestCount] = useState(2);
   const [showCheckInDatePicker, setShowCheckInDatePicker] = useState(false);
   const [showCheckoutDatePicker, setShowCheckoutDatePicker] = useState(false);
+  const [roomData, setRoomData] = useState([]);
+  const fetchRoomsData = async () => {
+    try {
+      const response = await axios.get(`${server}/room/get-rooms`);
+      setRoomData(response.data);
+    } catch (error) {
+      console.error("Error fetching rooms data:", error);
+    }
+  };
 
   useEffect(() => {
+    fetchRoomsData();
     const currentDate = new Date();
     setCheckInDate(currentDate);
-
     const nextDay = new Date(currentDate);
     nextDay.setDate(nextDay.getDate() + 1);
     setCheckOutDate(nextDay);
@@ -41,7 +51,7 @@ const Rooms = () => {
   };
 
   const handleRoomClick = (room) => {
-    navigate(`/room/${room?.id}`, {
+    navigate(`/room/${room?._id}`, {
       state: {
         checkInDate: checkInDate.toISOString(),
         checkOutDate: checkOutDate.toISOString(),
@@ -142,9 +152,9 @@ const Rooms = () => {
         <Button title="Check" />
       </div>
       <div className="flex flex-wrap justify-center mt-20">
-        {roomData.map((room) => (
+        {roomData?.data?.map((room) => (
           <div
-            key={room.id}
+            key={room._id}
             className="max-w-sm mx-4 mb-8 bg-white rounded-lg overflow-hidden shadow-md cursor-pointer "
             onClick={() => handleRoomClick(room)}
           >

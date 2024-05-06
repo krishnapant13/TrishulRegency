@@ -6,17 +6,26 @@ import { GiLeafSwirl, GiMountains } from "react-icons/gi";
 import { LiaToiletSolid } from "react-icons/lia";
 import { MdOutlineBalcony, MdWifi } from "react-icons/md";
 import { RiRestaurant2Line } from "react-icons/ri";
-import roomData from "../rooms.json";
 import { useLocation, useParams } from "react-router-dom";
 import BookNowPallet from "./BookNowPallet";
 import Footer from "./Footer";
+import axios from "axios";
+import { server } from "../server";
 const RoomDetails = () => {
   const [room, setRoom] = useState(null);
   const { roomId } = useParams();
   const location = useLocation();
+
   useEffect(() => {
-    const room = roomData.find((room) => room.id === parseInt(roomId));
-    setRoom(room);
+    const fetchRoom = async () => {
+      try {
+        const response = await axios.get(`${server}/room/${roomId}`);
+        setRoom(response.data);
+      } catch (error) {
+        console.error("Error fetching room:", error);
+      }
+    };
+    fetchRoom();
   }, [roomId]);
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -120,7 +129,11 @@ const RoomDetails = () => {
             </div>
           </div>
           <div className=" md:col-span-2 col-span-5 flex justify-center items-start ">
-            <BookNowPallet room={room} locationData={location.state || {}} button/>
+            <BookNowPallet
+              room={room}
+              locationData={location.state || {}}
+              button
+            />
           </div>
         </div>
       </div>

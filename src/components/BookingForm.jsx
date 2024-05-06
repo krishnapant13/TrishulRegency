@@ -3,6 +3,8 @@ import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import PhoneInput from "react-phone-input-2";
+import axios from "axios";
+import { server } from "../server";
 
 const BookingForm = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +20,7 @@ const BookingForm = () => {
     couponCode: "",
   });
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,10 +54,19 @@ const BookingForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    navigate("/checkout");
+    if (error) return;
+    try {
+      const response = await axios.post(
+        `${server}/guest/create-guest`,
+        formData
+      );
+      navigate("/checkout");
+      console.log(response);
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
   };
 
   return (

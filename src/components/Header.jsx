@@ -13,7 +13,12 @@ const Header = ({ name }) => {
       }}
     >
       <div className="absolute md:top-10 top-5 flex md:justify-between justify-center items-center md:w-[70%] w-full">
-        <img src={logo} className="md:w-[25%] w-[70%] " alt="" />
+        <img
+          src={logo}
+          className="md:w-[25%] w-[70%] cursor-pointer "
+          alt=""
+          onClick={() => navigate("/")}
+        />
         <ul className=" justify-center items-center hidden md:flex">
           <li
             className="px-6 font-bold text-white cursor-pointer "
