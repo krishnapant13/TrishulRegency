@@ -1,0 +1,236 @@
+[
+  {
+    "id": 1,
+    "heading": "Deluxe Room",
+    "subheading": "Luxury at its finest",
+    "description": "Experience unparalleled comfort and luxury in our Deluxe Room. Equipped with modern amenities and tastefully decorated interiors, this room offers the perfect retreat for travelers seeking indulgence.",
+    "price": 200,
+    "image": "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+    "facility": [
+      "Deluxe Bed",
+      "Luxury Wash Room",
+      "Free Wifi",
+      "Balcony",
+      "Restaurant Service"
+    ],
+    "gallery": [
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "heading": "Executive Suite",
+    "subheading": "Your home away from home",
+    "description": "Step into luxury with our Executive Suite. Spacious and elegantly furnished, this suite is designed to provide a comfortable stay for both business and leisure travelers.",
+    "price": 250,
+    "image": "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+    "facility": [
+      "Deluxe Bed",
+      "Luxury Wash Room",
+      "Free Wifi",
+      "Balcony",
+      "Restaurant Service"
+    ],
+    "gallery": [
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg"
+    ]
+  },
+  {
+    "id": 3,
+    "heading": "Family Room",
+    "subheading": "Perfect for family vacations",
+    "description": "Make lasting memories with your loved ones in our Family Room. Designed to accommodate families, this room offers ample space and thoughtful amenities for a memorable stay.",
+    "price": 300,
+    "image": "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+    "facility": [
+      "Deluxe Bed",
+      "Luxury Wash Room",
+      "Free Wifi",
+      "Balcony",
+      "Restaurant Service"
+    ],
+    "gallery": [
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg"
+    ]
+  },
+  {
+    "id": 4,
+    "heading": "Standard Room",
+    "subheading": "Comfort within reach",
+    "description": "Unwind in comfort in our Standard Room. Thoughtfully designed with your comfort in mind, this room offers a cozy retreat after a day of exploration.",
+    "price": 150,
+    "image": "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+    "facility": [
+      "Deluxe Bed",
+      "Luxury Wash Room",
+      "Free Wifi",
+      "Balcony",
+      "Restaurant Service"
+    ],
+    "gallery": [
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg"
+    ]
+  },
+  {
+    "id": 5,
+    "heading": "Luxury Suite",
+    "subheading": "Indulge in luxury",
+    "description": "Experience the epitome of luxury in our Luxury Suite. With its opulent furnishings and breathtaking views, this suite offers an unforgettable stay for discerning travelers.",
+    "price": 400,
+    "image": "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+    "facility": [
+      "Deluxe Bed",
+      "Luxury Wash Room",
+      "Free Wifi",
+      "Balcony",
+      "Restaurant Service"
+    ],
+    "gallery": [
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg"
+    ]
+  },
+  {
+    "id": 6,
+    "heading": "Premium Room",
+    "subheading": "Elevate your stay",
+    "description": "Elevate your stay with our Premium Room. Featuring modern amenities and stylish interiors, this room offers the perfect blend of comfort and sophistication.",
+    "price": 180,
+    "image": "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+    "facility": [
+      "Deluxe Bed",
+      "Luxury Wash Room",
+      "Free Wifi",
+      "Balcony",
+      "Restaurant Service"
+    ],
+    "gallery": [
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg"
+    ]
+  },
+  {
+    "id": 7,
+    "heading": "Honeymoon Suite",
+    "subheading": "Romantic escape",
+    "description": "Celebrate love and romance in our Honeymoon Suite. Designed for couples seeking a romantic getaway, this suite offers privacy, luxury, and enchanting views.",
+    "price": 350,
+    "image": "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+    "facility": [
+      "Deluxe Bed",
+      "Luxury Wash Room",
+      "Free Wifi",
+      "Balcony",
+      "Restaurant Service"
+    ],
+    "gallery": [
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg"
+    ]
+  },
+  {
+    "id": 8,
+    "heading": "Ocean View Room",
+    "subheading": "Breathtaking views",
+    "description": "Wake up to panoramic ocean views in our Ocean View Room. Perfect for nature lovers and beach enthusiasts, this room offers a serene escape from the hustle and bustle.",
+    "price": 280,
+    "image": "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+    "facility": [
+      "Deluxe Bed",
+      "Luxury Wash Room",
+      "Free Wifi",
+      "Balcony",
+      "Restaurant Service"
+    ],
+    "gallery": [
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg"
+    ]
+  },
+  {
+    "id": 9,
+    "heading": "Executive Room",
+    "subheading": "Comfort meets style",
+    "description": "Experience comfort and style in our Executive Room. With its contemporary design and thoughtful amenities, this room provides a relaxing retreat for business and leisure travelers alike.",
+    "price": 220,
+    "image": "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+    "facility": [
+      "Deluxe Bed",
+      "Luxury Wash Room",
+      "Free Wifi",
+      "Balcony",
+      "Restaurant Service"
+    ],
+    "gallery": [
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+      "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg"
+    ]
+  }
+]
