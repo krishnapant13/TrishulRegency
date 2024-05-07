@@ -5,29 +5,54 @@ import { MdOutlineWhatsapp } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <div className="w-full bg-black  h-contain flex flex-col p-10 justify-center items-center text-white">
-      <div className="flex md:flex-row flex-col justify-evenly items-center p-10">
-        <img src={logo} alt="logo" className="md:w-[30%] w-full" />
-        <ul>
-          <li>About</li>
-          <li>Staff</li>
-        </ul>
-        <ul>
-          <li>Services</li>
-          <li>Restaurents</li>
-        </ul>
+    <footer className="w-full bg-black text-white">
+      <div className="container mx-auto pt-10 flex flex-col md:flex-row items-center justify-center">
+        <img src={logo} alt="Terrace Peaks Logo" className="w-[30%] md:mr-10" />
+        <nav className="md:mr-10">
+          <ul>
+            <li>About</li>
+            <li>Staff</li>
+          </ul>
+        </nav>
+        <nav>
+          <ul>
+            <li>Services</li>
+            <li>Restaurants</li>
+          </ul>
+        </nav>
       </div>
-      <div className="w-full h-[1px] bg-white my-10"></div>
-      <div className=" flex justify-around items-center m-3 w-[30%]">
-        <CiFacebook size={30} />
-        <CiInstagram size={30} />
-        <MdOutlineWhatsapp size={30} />
+      <hr className="w-full bg-white my-10" />
+      <div className="flex justify-center items-center mb-3">
+        <a
+          href="https://www.facebook.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mx-3"
+        >
+          <CiFacebook size={30} />
+        </a>
+        <a
+          href="https://www.instagram.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mx-3"
+        >
+          <CiInstagram size={30} />
+        </a>
+        <a
+          href="https://web.whatsapp.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mx-3"
+        >
+          <MdOutlineWhatsapp size={30} />
+        </a>
       </div>
-      <p className="mb-[3em]">
-        &copy; Terrace Peaks Restaurant | All Rights Reserved | Made by :
-        Krishna Pant (@nth__user)
+      <p className="text-center">
+        &copy; Terrace Peaks Restaurant | All Rights Reserved | Made by: Krishna
+        Pant (@nth__user)
       </p>
-    </div>
+    </footer>
   );
 };
 

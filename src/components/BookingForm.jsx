@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
@@ -6,7 +6,7 @@ import PhoneInput from "react-phone-input-2";
 import axios from "axios";
 import { server } from "../server";
 
-const BookingForm = () => {
+const BookingForm = ({ guestData }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -21,7 +21,6 @@ const BookingForm = () => {
   });
   const navigate = useNavigate();
   const [error, setError] = useState("");
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     let error = "";
@@ -53,7 +52,6 @@ const BookingForm = () => {
       state: "",
     });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (error) return;
@@ -62,8 +60,10 @@ const BookingForm = () => {
         `${server}/guest/create-guest`,
         formData
       );
-      navigate("/checkout");
-      console.log(response);
+      const roomName = guestData?.room.heading
+        .toLowerCase()
+        .replace(/\s+/g, "-");
+      navigate(`/checkout/${roomName}-${guestData?.room._id}`);
     } catch (error) {
       console.error("Error:", error.message);
     }

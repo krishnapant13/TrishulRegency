@@ -40,15 +40,15 @@ const Checkout = () => {
         <div className="bg-white p-2 md:px-[10em] md:py-[5em] relative overflow-scroll">
           {paymentStatus === "paid" && <PaymentConfirmation />}
 
-          <div className="grid grid-cols-5  px-[3em]">
+          <div className="grid grid-cols-5  md:px-10 px-0">
             <div
               className={`${
                 paid ? "md:col-span-5" : "md:col-span-3"
               } col-span-5  flex flex-col justify-start items-center`}
             >
-              <div className="flex justify-center items-center">
+              <div className="flex md:flex-row flex-col justify-center items-center">
                 <div className="flex flex-col justify-center items-start w-fit ">
-                  <p className=" font-bold text-[1.2em]">
+                  <p className=" font-bold text-xl">
                     {paid ? "Order Details" : "Your Room"}
                   </p>
                   <img
@@ -97,20 +97,20 @@ const Checkout = () => {
                       </p>
                     </div>
                   ) : (
-                    <div className="flex flex-col justify-start items-start  w-full">
-                      <div className="flex  justify-start items-center w-full py-1">
+                    <div className="flex md:flex-col flex-row justify-start items-start  w-full">
+                      <div className="flex flex-col md:flex-row md:justify-start items-center w-full py-1">
                         <BsTextarea size={25} className="mr-2" />
                         <span className="text-[0.8em]">25 Sf</span>
                       </div>
-                      <div className="flex  justify-start items-center  w-full py-1">
+                      <div className="flex flex-col md:flex-row md:justify-start items-center  w-full py-1">
                         <IoPeopleCircleOutline size={25} className="mr-2" />
                         <span className="text-[0.8em]"> Guests</span>
                       </div>
-                      <div className="flex  justify-start items-center w-full py-1">
+                      <div className="flex flex-col md:flex-row md:justify-start items-center w-full py-1">
                         <GiLeafSwirl size={25} className="mr-2" />
                         <span className="text-[0.8em]"> Tea Garden</span>
                       </div>
-                      <div className="flex  justify-start items-center  w-full py-1">
+                      <div className="flex flex-col md:flex-row md:justify-start items-center  w-full py-1">
                         <GiMountains size={25} className="mr-2" />
                         <span className="text-[0.8em] text-center">
                           Mountain View
@@ -209,12 +209,13 @@ const Checkout = () => {
                 />
               </div>
             )}
-            <div className=" w-full flex justify-center items-start">
+          </div>
+          {paid && (
+            <div className="md:w-[30%] w-full flex justify-center items-start">
               <Button title="Download pdf" />
             </div>
-          </div>
+          )}
         </div>
-        <Footer />
       </div>
       <Footer />
     </div>
