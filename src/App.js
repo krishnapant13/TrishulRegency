@@ -32,7 +32,7 @@ function App() {
     <div className="App">
       <BrowserRouter basename="/TerracePeaks">
         <Routes>
-          <Route path="/trishool-hotel" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/rooms" element={<Rooms roomData={roomData} />} />
           <Route path="/booking/:roomName" element={<Booking />} />
           <Route path="/about" element={<About />} />
