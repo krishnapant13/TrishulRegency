@@ -47,10 +47,10 @@ const Rooms = ({ roomData }) => {
         checkOutDate: checkOutDate.toISOString(),
         guestCount: guestCount,
         price: room?.price,
+        minPrice: room?.minPrice,
       },
     });
   };
-
   const navigate = useNavigate();
   return (
     <>
@@ -166,7 +166,11 @@ const Rooms = ({ roomData }) => {
                 <h3 className="text-gray-600 mb-2">{room.subheading}</h3>
                 <p className="text-gray-800 mb-2">{room.description}</p>
                 <p className="text-gray-700 font-semibold">
-                  ₹{room.price} per night
+                  ₹{room.price}{" "}
+                  <span className="text-red-500 line-through">
+                    {room.mainPrice}
+                  </span>{" "}
+                  per night
                 </p>
               </div>
             </div>

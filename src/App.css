@@ -6,10 +6,13 @@
 
 /* @import url('https://fonts.googleapis.com/css2?family=Sedan+SC&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
-
+/* blog font */
+@import url('https://fonts.googleapis.com/css2?family=Devonshire&family=Federant&family=Love+Light&family=Marck+Script&family=New+Tegomin&family=Playball&display=swap');
+/* main font */
+@import url('https://fonts.googleapis.com/css2?family=Devonshire&family=Federant&family=Junge&family=Love+Light&family=Marck+Script&family=New+Tegomin&family=Playball&display=swap');
 
 body {
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Junge", cursive;
 }
 
 /* For WebKit browsers */

@@ -3,17 +3,18 @@ import Header from "./Header";
 import Footer from "./Footer";
 import NewsLetter from "./NewsLetter";
 import Speciality from "./Speciality";
+import ImageGrid from "./common/ImageGrid";
 
 const About = () => {
   return (
     <div className="h-screen">
       <Header name="About us" />
-      <section className="bg-white p-2 md:px-[5em] xl:px-[10em] lg:px-2 md:py-[5em] relative overflow-scroll">
+      <section className="bg-white px-2 py-10 md:px-[5em] xl:px-[10em] lg:px-2 md:py-[5em] relative overflow-scroll">
         <div className="flex flex-col justify-center items-center">
-          <h3 className="font-bold uppercase text-orange-300 text-xl w-full text-center">
+          <h3 className="font-bold uppercase text-yellow-700 text-lg w-full text-center">
             We are awesome
           </h3>
-          <h1 className="font-bold uppercase text-4xl text-center">
+          <h1 className="font-bold uppercase text-2xl text-center">
             Welcome to the Terrace Peaks !
           </h1>
           <h5 className="font-bold uppercase text-sm text-gray-400 tracking-widest text-center">
@@ -34,6 +35,9 @@ const About = () => {
             repellendus, voluptatibus adipisci? Laudantium.
           </p>
         </div>
+      </section>
+      <section className=" md:px-40 px-2 lg:px-2">
+        <ImageGrid />
       </section>
       <Speciality />
       <NewsLetter />

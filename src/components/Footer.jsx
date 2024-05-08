@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer className="w-full bg-black text-white">
       <div className="container mx-auto pt-10 flex flex-col md:flex-row items-center justify-center">
-        <img src={logo} alt="Terrace Peaks Logo" className="w-[30%] md:mr-10" />
+        <img src={logo} alt="Terrace Peaks Logo" className="w-[25%] md:mr-10" />
         <nav className="md:mr-10">
           <ul>
             <li>About</li>

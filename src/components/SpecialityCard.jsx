@@ -23,8 +23,8 @@ const SpecialityCard = ({ icon, title, description }) => {
   };
 
   return (
-    <article className=" md:col-span-1 col-span-2 flex justify-center items-center md:p-5 p-2">
-      <div className="flex justify-center item-center">
+    <article className=" md:col-span-1 col-span-4 flex justify-center items-center md:p-5 p-2">
+      <div className="flex justify-center item-center w-full">
         <div className=" flex justify-center items-center w-[30%] md:w-[20%]">
           {iconMap[icon]}
         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import SpecialityCard from "./SpecialityCard";
+import Info from "./common/Info";
 
 const Speciality = () => {
   const specialties = [
@@ -52,19 +53,11 @@ const Speciality = () => {
 
   return (
     <section>
-      <div className="flex flex-col justify-center items-center">
-        <h3 className="font-bold capitalize text-gray-400 text-md">
-          We are awesome
-        </h3>
-        <hr className="md:w-[10%] w-[30%] h-[4px] bg-orange-400 mb-4" />
-        <h2 className="font-bold uppercase text-2xl  tracking-widest mb-4">
-          Our Speciality
-        </h2>
-        <p className="font-bold text-center text-sm w-[90%] md:w-[50%]  tracking-widest">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore
-          provident vero, debitis.
-        </p>
-      </div>
+      <Info
+        title="We are awesome"
+        subtitle=" Our Speciality"
+        description=" Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore provident vero, debitis."
+      />
       <div className="grid md:grid-cols-3 grid-cols-4 md:w-[70%] w-[90%] m-auto">
         {specialties.map((specialty, index) => (
           <SpecialityCard

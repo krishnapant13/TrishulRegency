@@ -15,10 +15,10 @@ const NewsLetter = () => {
         <p className="text-white tracking-widest capitalize">
           Get updates regularly
         </p>
-        <h2 className="font-bold tracking-widest capitalize text-2xl text-white mb-4">
+        <h2 className="font-bold tracking-widest capitalize text-2xl text-white mb-4 text-center  ">
           Subscribe to our newsletter
         </h2>
-        <p className="text-white tracking-widest capitalize">
+        <p className="text-white tracking-widest capitalize text-center">
           Elevate Your Stay Amidst Nature's Beauty
         </p>
         <div className="relative md:w-[50%] w-[90%]">

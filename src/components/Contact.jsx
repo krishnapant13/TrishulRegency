@@ -14,14 +14,14 @@ const Contact = () => {
       <Header name="Contact us" />
       <section className=" grid grid-cols-3 md:w-[60%] w-full m-auto md:p-10 p-2 ">
         <article className="md:col-span-1 col-span-3 flex flex-col justify-center items-center my-5 md:my-0">
-          <div className="bg-orange-300 flex justify-center items-center w-20 h-20 rounded-full mb-2">
+          <div className="bg-yellow-700 flex justify-center items-center w-20 h-20 rounded-full mb-2">
             <IoLocation size={30} color="white" />
           </div>
           <h3 className="font-bold text-xl">Location</h3>
           <p className="text-center">123 Main Street, City, Country</p>
         </article>
         <article className="md:col-span-1 col-span-3  flex flex-col justify-center items-center my-5 md:my-0">
-          <div className="bg-orange-300 flex justify-center items-center w-20 h-20 rounded-full mb-2">
+          <div className="bg-yellow-700 flex justify-center items-center w-20 h-20 rounded-full mb-2">
             <FaPhoneAlt size={25} color="white" />
           </div>
           <h3 className="font-bold text-xl">Phone</h3>
@@ -30,7 +30,7 @@ const Contact = () => {
           </p>
         </article>
         <article className="md:col-span-1 col-span-3  flex flex-col justify-center items-center my-5 md:my-0">
-          <div className="bg-orange-300 flex justify-center items-center w-20 h-20 rounded-full mb-2">
+          <div className="bg-yellow-700 flex justify-center items-center w-20 h-20 rounded-full mb-2">
             <IoMail size={30} color="white" />
           </div>
           <h3 className="font-bold text-xl">Email</h3>

@@ -12,6 +12,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { server } from "./server.js";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function App() {
   const [roomData, setRoomData] = useState([]);
@@ -27,7 +29,6 @@ function App() {
 
     fetchRoomsData();
   }, []);
-
   return (
     <div className="App">
       <BrowserRouter basename="/TerracePeaks">
