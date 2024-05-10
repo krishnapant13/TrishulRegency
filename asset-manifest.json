@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/TerracePeaks/static/css/main.51aa17cb.css",
-    "main.js": "/TerracePeaks/static/js/main.f2037342.js",
+    "main.css": "/TerracePeaks/static/css/main.cabcfd32.css",
+    "main.js": "/TerracePeaks/static/js/main.92b5ce90.js",
     "static/js/453.b990a983.chunk.js": "/TerracePeaks/static/js/453.b990a983.chunk.js",
     "static/media/Terrace Peaks.png": "/TerracePeaks/static/media/Terrace Peaks.05344125f5d5fb80e6d6.png",
     "static/media/TerracePeaksWhite.png": "/TerracePeaks/static/media/TerracePeaksWhite.bed646a2001a8b2cab96.png",
@@ -10,12 +10,12 @@
     "static/media/slick.ttf": "/TerracePeaks/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/TerracePeaks/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/TerracePeaks/index.html",
-    "main.51aa17cb.css.map": "/TerracePeaks/static/css/main.51aa17cb.css.map",
-    "main.f2037342.js.map": "/TerracePeaks/static/js/main.f2037342.js.map",
+    "main.cabcfd32.css.map": "/TerracePeaks/static/css/main.cabcfd32.css.map",
+    "main.92b5ce90.js.map": "/TerracePeaks/static/js/main.92b5ce90.js.map",
     "453.b990a983.chunk.js.map": "/TerracePeaks/static/js/453.b990a983.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.51aa17cb.css",
-    "static/js/main.f2037342.js"
+    "static/css/main.cabcfd32.css",
+    "static/js/main.92b5ce90.js"
   ]
 }
