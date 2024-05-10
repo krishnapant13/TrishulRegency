@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import PhoneInput from "react-phone-input-2";
 import axios from "axios";
 import { server } from "../server";
+import { toast } from "react-toastify";
 
 const BookingForm = ({ guestData }) => {
   const [formData, setFormData] = useState({
@@ -23,11 +24,10 @@ const BookingForm = ({ guestData }) => {
   const [error, setError] = useState("");
   const handleChange = (e) => {
     const { name, value } = e.target;
-    let error = "";
     if (name === "emailAddress") {
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (!emailRegex.test(value)) {
-        error = "Please enter a valid email address";
+        setError("Please enter a valid email address");
       }
     }
 
@@ -56,16 +56,20 @@ const BookingForm = ({ guestData }) => {
     e.preventDefault();
     if (error) return;
     try {
-      const response = await axios.post(
-        `${server}/guest/create-guest`,
-        formData
-      );
+      await axios.post(`${server}/guest/create-guest-by-booking`, formData);
       const roomName = guestData?.room.heading
         .toLowerCase()
         .replace(/\s+/g, "-");
       navigate(`/checkout/${roomName}-${guestData?.room._id}`);
     } catch (error) {
-      console.error("Error:", error.message);
+      if (error.response) {
+        const errorMessage = error.response.data.message;
+        toast.error(errorMessage);
+      } else if (error.request) {
+        toast.error("Please try again later.");
+      } else {
+        toast.error("An error occurred. Please try again later.");
+      }
     }
   };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { IoLocation, IoMail } from "react-icons/io5";
+import { IoLocation } from "react-icons/io5";
 import { GiGreenhouse, GiPlantWatering } from "react-icons/gi";
 import {
   MdOutlineBedroomParent,

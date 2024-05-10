@@ -3,7 +3,6 @@ import React from "react";
 import Header from "./Header";
 import NewsLetter from "./NewsLetter";
 import Footer from "./Footer";
-import ContactCard from "./ContactCard";
 import MailForm from "./MailForm";
 import { IoLocation, IoMail } from "react-icons/io5";
 import { FaPhoneAlt } from "react-icons/fa";

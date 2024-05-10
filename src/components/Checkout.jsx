@@ -53,7 +53,7 @@ const Checkout = () => {
                   </p>
                   <img
                     src={guestData?.room?.image}
-                    alt={"Room Image"}
+                    alt={"Room"}
                     className={`duration-500 ease-linear`}
                   />{" "}
                 </div>

@@ -20,14 +20,14 @@ const Home = () => {
     <div className="h-screen">
       <Header navOnly />
       <section className="grid md:grid-cols-3 m-auto md:px-[13em] px-2 md:pt-20 pt-10 h-screen w-full">
-        <div className="flex flex-col md:col-span-2 col-span-3 justify-center items-start w-full  md:w-[80%]">
-          <h4 className="text-orange-400 uppercase text-xl my-2">
+        <div className="flex flex-col md:col-span-2 col-span-3 justify-center md:items-start items-center w-full  md:w-[80%]">
+          <h4 className="text-orange-400 uppercase  text-xl my-2">
             Its amazing
           </h4>
-          <h1 className="text-amber-900 font-bold capitalize text-4xl my-2">
+          <h1 className="text-amber-900 font-bold text-center capitalize text-4xl my-2">
             Enjoy a dream vacation in the hotel terrace peaks
           </h1>
-          <h5 className="text-gray-400 text-lg my-2">
+          <h5 className="text-gray-400 text-justify text-lg my-2">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
             quae nobis repellat repellendus iure nisi impedit, dolore modi
             laudantium autem, beatae quis. Molestiae laudantium commodi fuga,
@@ -43,7 +43,7 @@ const Home = () => {
               <img
                 key={index}
                 src={img}
-                alt={`Image ${index}`}
+                alt={`carousel-${index}`}
                 className="object-cover bg-cover  md:h-[35em]"
               />
             ))}

@@ -25,7 +25,7 @@ const Booking = () => {
               <div className="flex md:flex-row flex-col justify-center items-center">
                 <div className="flex flex-col justify-center items-start w-fit">
                   <p className="font-bold">Your Room</p>
-                  <img src={guestData?.room?.image} alt="Room Image" />{" "}
+                  <img src={guestData?.room?.image} alt="Room" />{" "}
                 </div>
                 <div className="flex flex-col justify-start items-start md:p-5 p-2 w-full">
                   <p className="w-full text-start font-bold text-[1.5em]">

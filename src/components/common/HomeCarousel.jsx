@@ -31,7 +31,7 @@ const HomeCarousel = ({ children }) => {
   };
 
   return (
-    <div className="md:w-full md:h-full w-80 h-80 my-3">
+    <div className="md:w-full md:h-full w-80 h-80 my-3 md:my-0">
       <Slider {...settings}>{children}</Slider>
     </div>
   );
