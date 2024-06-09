@@ -41,7 +41,6 @@ const Navigators = () => {
     }
   };
   const navigatorsRef = useRef(null);
-  console.log(expanded);
   useEffect(() => {
     localStorage.setItem("activeIndex", active.toString());
     const handleOutsideClick = (e) => {

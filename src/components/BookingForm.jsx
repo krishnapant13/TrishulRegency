@@ -6,12 +6,16 @@ import PhoneInput from "react-phone-input-2";
 import axios from "axios";
 import { server } from "../server";
 import { toast } from "react-toastify";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { addGuestDetails } from "../redux/slices/userSlice";
 
 const BookingForm = ({ guestData }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     emailAddress: "",
+    password: "",
     phoneNumber: "",
     address: "",
     state: "",
@@ -21,20 +25,32 @@ const BookingForm = ({ guestData }) => {
     couponCode: "",
   });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+    let newError = "";
+
     if (name === "emailAddress") {
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (!emailRegex.test(value)) {
-        setError("Please enter a valid email address");
+        newError = "Please enter a valid email address";
+      }
+    } else if (name === "password") {
+      const passwordRegex =
+        /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+      if (!passwordRegex.test(value)) {
+        newError =
+          "Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one number, and one special character.";
       }
     }
-
+    setError(newError);
     setFormData({
       ...formData,
       [name]: value,
-      error,
     });
   };
 
@@ -54,13 +70,22 @@ const BookingForm = ({ guestData }) => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (error) return;
+    if (error) {
+      toast.error(error);
+      return;
+    }
+    setLoading(true);
     try {
-      await axios.post(`${server}/guest/create-guest-by-booking`, formData);
+      const response = await axios.post(
+        `${server}/guest/create-guest`,
+        formData
+      );
       const roomName = guestData?.room.heading
         .toLowerCase()
         .replace(/\s+/g, "-");
+      dispatch(addGuestDetails(response.data.user));
       navigate(`/checkout/${roomName}-${guestData?.room._id}`);
+      toast.success(response.data.message);
     } catch (error) {
       if (error.response) {
         const errorMessage = error.response.data.message;
@@ -70,6 +95,8 @@ const BookingForm = ({ guestData }) => {
       } else {
         toast.error("An error occurred. Please try again later.");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -103,6 +130,30 @@ const BookingForm = ({ guestData }) => {
           className="p-2 border border-gray-300 w-full focus:outline-none"
           required
         />
+        <div className="relative">
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Create Login Password"
+            className="p-2 border border-gray-300 w-full focus:outline-none"
+            required
+          />
+          {showPassword ? (
+            <BsEyeSlashFill
+              size={20}
+              className="absolute top-1/2 right-2 -translate-x-1/2 -translate-y-1/2"
+              onClick={() => setShowPassword((prev) => !prev)}
+            />
+          ) : (
+            <BsEyeFill
+              size={20}
+              className="absolute top-1/2 right-2 -translate-x-1/2 -translate-y-1/2"
+              onClick={() => setShowPassword((prev) => !prev)}
+            />
+          )}
+        </div>
         <PhoneInput
           country={"in"}
           name="phoneNumber"
@@ -131,7 +182,6 @@ const BookingForm = ({ guestData }) => {
             required: true,
           }}
         />
-
         <CountryDropdown
           name="country"
           value={formData.country}

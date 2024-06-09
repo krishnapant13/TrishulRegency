@@ -1,31 +1,51 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  bookingDetails: null,
+  guestDetails: null,
+  bookedRoom: null,
+  status: "idle",
+  error: null,
+};
+
 export const userSlice = createSlice({
-  name: "Authentication",
-  initialState: {
-    user: null,
-    isAuthenticated: false,
-    loading: false,
-    error: null,
-  },
+  name: "user",
+  initialState,
   reducers: {
-    LoadUserRequest: (state) => {
-      state.loading = true;
+    updateUserRoomBookingDetails: (state, action) => {
+      state.bookingDetails = action.payload;
     },
-    LoadUserSuccess: (state, action) => {
-      state.loading = false;
-      state.isAuthenticated = true;
-      state.user = action.payload;
+    updateCheckInDate: (state, action) => {
+      state.bookingDetails.checkInDate = action.payload;
     },
-    LoadUserFail: (state, action) => {
-      state.loading = false;
+    updateCheckOutDate: (state, action) => {
+      state.bookingDetails.checkOutDate = action.payload;
+    },
+    addGuestDetails: (state, action) => {
+      state.guestDetails = action.payload;
+    },
+    updateBookedRoom: (state, action) => {
+      state.bookedRoom = action.payload;
+    },
+    setStatus: (state, action) => {
+      state.status = action.payload;
+    },
+    setError: (state, action) => {
       state.error = action.payload;
-      state.isAuthenticated = false;
     },
   },
 });
 
-export const { LoadUserRequest, LoadUserSuccess, LoadUserFail } =
-  userSlice.actions;
+export const {
+  updateUserRoomBookingDetails,
+  updateCheckInDate,
+  updateCheckOutDate,
+  addGuestDetails,
+  updateBookedRoom,
+  setStatus,
+  setError,
+} = userSlice.actions;
+
+export const selectUser = (state) => state.user;
 
 export default userSlice.reducer;

@@ -6,7 +6,7 @@ import { GiLeafSwirl, GiMountains } from "react-icons/gi";
 import { LiaToiletSolid } from "react-icons/lia";
 import { MdOutlineBalcony, MdWifi } from "react-icons/md";
 import { RiRestaurant2Line } from "react-icons/ri";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import BookNowPallet from "./BookNowPallet";
 import Footer from "./Footer";
 import axios from "axios";
@@ -14,13 +14,16 @@ import { server } from "../server";
 import Loader from "./Loader";
 import Header from "./Header";
 import { Helmet } from "react-helmet";
+import bgVerticle from "../assets/bgVertical.jpg";
+import {  useSelector } from "react-redux";
+import ImageGrid from "./common/ImageGrid";
 
 const RoomDetails = () => {
   const [room, setRoom] = useState(null);
   const [loading, setLoading] = useState(true);
   const { nameId } = useParams();
   const roomId = nameId.split("-").pop();
-  const location = useLocation();
+  const user = useSelector((state) => state.user);
   useEffect(() => {
     const fetchRoom = async () => {
       try {
@@ -35,8 +38,12 @@ const RoomDetails = () => {
     fetchRoom();
   }, [roomId]);
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }, []);
+
   const renderFacilityIcon = (facility) => {
     switch (facility) {
       case "Deluxe Bed":
@@ -102,11 +109,14 @@ const RoomDetails = () => {
             <Loader />
           ) : (
             <div className="w-full">
-              <div className="bg-white p-2 md:px-[5em] xl:px-[10em] lg:px-2 md:py-[5em] relative overflow-scroll">
+              <div
+                className="bg-white p-2 md:px-[5em] xl:px-[10em] lg:px-2 md:py-[5em] relative overflow-scroll bg-repeat bg-contain"
+                style={{ backgroundImage: `url(${bgVerticle})` }}
+              >
                 <div className="grid grid-cols-5 w-full">
                   <div className="md:col-span-3 col-span-5  flex flex-col justify-center items-center">
                     <div className="flex justify-between items-center w-full md:mb-5">
-                      <h1 className="font-bold capitalize my-[1em] md:my-0 text-4xl md:text-[3em] ">
+                      <h1 className="font-bold capitalize my-[1em] md:my-0 text-4xl ">
                         {room?.heading}
                       </h1>
                       <div className="flex flex-col justify-center items-center">
@@ -164,25 +174,13 @@ const RoomDetails = () => {
                     </div>
                     <div className="flex flex-col justify-center items-start w-full mt-4">
                       <p className="font-bold capitalize">Gallery</p>
-                      <div className="grid md:grid-cols-3 grid-cols-2 gap-1">
-                        {room &&
-                          room.gallery &&
-                          room.gallery.map((url, index) => (
-                            <div key={index} className="col-span-1">
-                              <img
-                                src={url}
-                                alt={"image-" + index}
-                                className="w-full"
-                              />
-                            </div>
-                          ))}
-                      </div>
+                      <ImageGrid />
                     </div>
                   </div>
                   <div className=" md:col-span-2 col-span-5 flex justify-center items-start ">
                     <BookNowPallet
                       room={room}
-                      locationData={location.state || {}}
+                      bookingDetails={user.bookingDetails}
                       button
                     />
                   </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { BsTextarea } from "react-icons/bs";
@@ -7,37 +7,90 @@ import { GiLeafSwirl, GiMountains } from "react-icons/gi";
 import BookNowPallet from "./BookNowPallet";
 import Button from "./Button";
 import PaymentConfirmation from "./PaymentConfirmation";
+import { useDispatch, useSelector } from "react-redux";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import { server } from "../server";
+import axios from "axios";
+import {
+  setError,
+  setStatus,
+  updateBookedRoom,
+} from "../redux/slices/userSlice";
+import { RoomContext } from "./common/RoomContext";
 
 const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState("Cash on Spot");
   const [paymentStatus, setPaymentStatus] = useState("unpaid");
-  const guestData = JSON.parse(localStorage.getItem("guestData"));
-  const { room, ...locationData } = guestData;
+  const bookingDetails = useSelector((state) => state.user.bookingDetails);
+  const guestDetails = useSelector((state) => state.user.guestDetails);
   const handlePaymentMethodChange = (e) => {
     setPaymentMethod(e.target.value);
   };
   const paid = paymentStatus === "paid";
   const topRef = useRef(null);
+  const contentRef = useRef(null);
+
+  const { updateBookedDates } = useContext(RoomContext);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   const scrollToTop = () => {
     if (topRef.current) {
       topRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
-  const checkInDate = new Date(locationData.checkInDate);
-  const checkOutDate = new Date(locationData.checkOutDate);
+  const checkInDate = new Date(bookingDetails.checkInDate);
+  const checkOutDate = new Date(bookingDetails.checkOutDate);
   const timeDifference = checkOutDate.getTime() - checkInDate.getTime();
   const nights = Math.ceil(timeDifference / (1000 * 3600 * 24));
   const days = nights - 1;
+  const dispatch = useDispatch();
+  const handleBooking = async () => {
+    dispatch(setStatus("loading"));
+    try {
+      const response = await axios.post(`${server}/room/bookRoom`, {
+        bookingDetails,
+        guestDetails,
+        paymentMethod,
+      });
+      dispatch(updateBookedRoom(response.data));
+      updateBookedDates(bookingDetails.room._id, {
+        startDate: bookingDetails.checkInDate,
+        endDate: bookingDetails.checkOutDate,
+      });
+      setPaymentStatus("paid");
+      scrollToTop();
+      dispatch(setStatus("succeeded"));
+    } catch (error) {
+      // dispatch(setError(error.response.data));
+      dispatch(setStatus("failed"));
+    }
+  };
+
+  const downloadPdf = async () => {
+    const element = contentRef.current;
+    const canvas = await html2canvas(element);
+    const data = canvas.toDataURL("image/png");
+    const pdf = new jsPDF();
+    const imgProperties = pdf.getImageProperties(data);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save("checkout.pdf");
+  };
+
   return (
     <div className="h-screen" ref={topRef}>
       <Header
         name={`${paymentStatus === "unpaid" ? "Checkout" : "Thank You"}`}
       />
       <div>
-        <div className="bg-white p-2 md:px-[10em] md:py-[5em] relative overflow-scroll">
+        <div
+          className="bg-white p-2 md:px-[10em] md:py-[5em] relative overflow-scroll"
+          ref={contentRef}
+        >
           {paymentStatus === "paid" && <PaymentConfirmation />}
 
           <div className="grid grid-cols-5  md:px-10 px-0">
@@ -52,35 +105,35 @@ const Checkout = () => {
                     {paid ? "Order Details" : "Your Room"}
                   </p>
                   <img
-                    src={guestData?.room?.image}
+                    src={bookingDetails?.room?.image}
                     alt={"Room"}
                     className={`duration-500 ease-linear`}
                   />{" "}
                 </div>
                 <div className="flex flex-col justify-start items-start p-5 w-full h-full">
                   <p className="w-full text-start font-bold text-[1.5em]">
-                    {guestData?.room?.heading}
+                    {bookingDetails?.room?.heading}
                   </p>
                   {paid ? (
                     <div className=" flex flex-col justify-start items-start w-full">
                       <p className="py-2">
                         Check In:{" "}
                         <span className="text-gray-500">
-                          {new Date(locationData.checkInDate).toDateString()}{" "}
+                          {new Date(bookingDetails.checkInDate).toDateString()}{" "}
                         </span>
                       </p>
 
                       <p className="py-2">
                         Check Out:{" "}
                         <span className="text-gray-500">
-                          {new Date(locationData.checkOutDate).toDateString()}
+                          {new Date(bookingDetails.checkOutDate).toDateString()}
                         </span>
                       </p>
 
                       <p className="py-2">
                         Guests:{" "}
                         <span className="text-gray-500">
-                          {locationData.guestCount}{" "}
+                          {bookingDetails.guestCount}{" "}
                         </span>
                       </p>
                       <p className="font-bold">
@@ -126,16 +179,58 @@ const Checkout = () => {
 
                   <p className="w-full text-end font-bold">
                     {" "}
-                    Amount Paid: ₹{locationData.price}
+                    Amount Paid: ₹{bookingDetails.calculatedPrice}
                   </p>
                 </div>
               )}
-              <div className="flex flex-col justify-start items-start py-5 pr-5 w-full mt-5 ">
-                <p className="font-bold"> Your Information </p>
+              <div className="flex md:flex-row flex-col justify-between items-center w-full ">
+                <div className="flex flex-col justify-start items-start py-5 md:pr-5 w-full mt-5">
+                  <p className=" font-extrabold md:text-xl text-2xl">
+                    Your Information
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-4 gap-x-6 gap-y-2 md:text-sm text-xl mt-3">
+                    <div className="flex">
+                      <p className="font-bold mr-2">First Name:</p>
+                      <p>{guestDetails?.firstName}</p>
+                    </div>
+                    <div className="flex">
+                      <p className="font-bold mr-2">Last Name:</p>
+                      <p>{guestDetails?.lastName}</p>
+                    </div>
+                    <div className="flex">
+                      <p className="font-bold mr-2">Email:</p>
+                      <p>{guestDetails?.emailAddress}</p>
+                    </div>
+                    <div className="flex">
+                      <p className="font-bold mr-2">State:</p>
+                      <p>{guestDetails?.state}</p>
+                    </div>
+                    <div className="flex">
+                      <p className="font-bold mr-2">Country:</p>
+                      <p>{guestDetails?.country}</p>
+                    </div>
+                    <div className="flex">
+                      <p className="font-bold mr-2">Zip Code:</p>
+                      <p>{guestDetails?.zipCode}</p>
+                    </div>
+                    <div className="col-span-1 md:col-span-2 flex flex-col">
+                      <p className="font-bold">Additional Message:</p>
+                      <p>{guestDetails?.additionMessage}</p>
+                    </div>
+                  </div>
+                </div>
+                {paid && (
+                  <div className=" flex justify-center items-start ">
+                    <p className=" font-extrabold text-xl">
+                      Reservation Details
+                    </p>
+                  </div>
+                )}
               </div>
+
               {!paid && (
                 <div className="flex flex-col justify-start items-start py-5 pr-5 w-full mt-5 ">
-                  <div className="my-5">
+                  <div className="my-5 md:text-xl text-2xl">
                     <p className="font-semibold mb-4">Payment Method</p>
                     <div>
                       <input
@@ -192,8 +287,7 @@ const Checkout = () => {
                   </div>
                   <div
                     onClick={() => {
-                      setPaymentStatus("paid");
-                      scrollToTop();
+                      handleBooking();
                     }}
                   >
                     <Button title="Pay now" />
@@ -204,14 +298,17 @@ const Checkout = () => {
             {!paid && (
               <div className=" md:col-span-2 col-span-5 flex justify-center items-start ">
                 <BookNowPallet
-                  room={guestData.room}
-                  locationData={locationData}
+                  room={bookingDetails.room}
+                  bookingDetails={bookingDetails}
                 />
               </div>
             )}
           </div>
           {paid && (
-            <div className="md:w-[30%] w-full flex justify-center items-start">
+            <div
+              className="md:w-[30%] w-full flex justify-center items-start"
+              onClick={() => downloadPdf()}
+            >
               <Button title="Download pdf" />
             </div>
           )}

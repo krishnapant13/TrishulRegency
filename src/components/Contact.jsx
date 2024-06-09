@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import Header from "./Header";
 import NewsLetter from "./NewsLetter";
@@ -8,6 +8,13 @@ import { IoLocation, IoMail } from "react-icons/io5";
 import { FaPhoneAlt } from "react-icons/fa";
 
 const Contact = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <div className="h-screen">
       <Header name="Contact us" />

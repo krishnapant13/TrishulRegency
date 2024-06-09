@@ -12,7 +12,7 @@ const Loader = () => {
     },
   };
   return (
-    <div className="h-screen w-full flex justify-center items-center">
+    <div className="h-screen w-full flex justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0000007a]">
       <Lottie options={defaultOptions} height={200} width={200} />
     </div>
   );

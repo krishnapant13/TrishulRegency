@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import NewsLetter from "./NewsLetter";
@@ -6,6 +6,13 @@ import Speciality from "./Speciality";
 import ImageGrid from "./common/ImageGrid";
 
 const About = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <div className="h-screen">
       <Header name="About us" />

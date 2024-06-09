@@ -16,7 +16,7 @@ const ImageGrid = () => {
 
   const gridItems = images.map((img, index) => {
     let style = {};
-    if (images.length % 2 === 0 && images.length <= 4) {
+    if (images.length % 2 === 0 && images.length <= 5) {
       style.gridRow = "span 1";
       style.gridColumn = "span 2";
     } else if (index % 5 === 0) {
@@ -42,7 +42,7 @@ const ImageGrid = () => {
     );
   });
   return (
-    <div className="xl:h-[70vh] h-screen md:pt-10 pt-5 grid xl:grid-cols-4 grid-cols-2 gap-1 my-5">
+    <div className="xl:h-[70vh] h-screen md:pt-10 pt-5 grid xl:grid-cols-4 grid-cols-2 gap-1 my-5 w-full">
       {gridItems}
     </div>
   );

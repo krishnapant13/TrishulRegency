@@ -6,11 +6,11 @@ import { IoPeopleCircleOutline } from "react-icons/io5";
 import { GiLeafSwirl, GiMountains } from "react-icons/gi";
 import BookNowPallet from "./BookNowPallet";
 import BookingForm from "./BookingForm";
+import { useSelector } from "react-redux";
+import bg from "../assets/Snapseed.jpg";
 
 const Booking = () => {
-  const guestData = JSON.parse(localStorage.getItem("guestData"));
-  const { room, ...locationData } = guestData;
-
+  const guestData = useSelector((state) => state.user.bookingDetails);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -19,16 +19,21 @@ const Booking = () => {
     <div className="h-screen">
       <Header name="Booking" />
       <div>
-        <div className="bg-white p-2 md:px-[10em] xl:px-[10em] lg:px-2 md:py-[5em] relative overflow-scroll">
+        <div
+          className=" p-2 md:px-[8em] xl:px-[8em] lg:px-2 md:py-[5em] relative overflow-scroll bg-cover bg-center"
+          style={{ backgroundImage: `url(${bg})` }}
+        >
           <div className="grid grid-cols-5  md:px-[3em]">
             <div className="md:col-span-3 col-span-5  flex flex-col justify-start items-center">
               <div className="flex md:flex-row flex-col justify-center items-center">
                 <div className="flex flex-col justify-center items-start w-fit">
-                  <p className="font-bold">Your Room</p>
+                  <p className="font-bold text-xl tracking-widest uppercase">
+                    Your Room
+                  </p>
                   <img src={guestData?.room?.image} alt="Room" />{" "}
                 </div>
                 <div className="flex flex-col justify-start items-start md:p-5 p-2 w-full">
-                  <p className="w-full text-start font-bold text-[1.5em]">
+                  <p className="w-full text-start font-bold text-xl">
                     {guestData?.room?.heading}
                   </p>
                   <div className="flex md:flex-col flex-row justify-start items-start w-full">
@@ -51,7 +56,7 @@ const Booking = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col justify-start items-start py-5 pr-5 w-full mt-5">
+              <div className="flex flex-col justify-start items-start py-5 md:pr-5 p-2 w-full mt-5">
                 <div className="flex md:flex-row flex-col justify-between items-start md:items-center w-full">
                   <p className="font-bold md:text-[1em] text-[1.2em]">
                     Add Your Information
@@ -71,7 +76,7 @@ const Booking = () => {
             <div className="md:col-span-2 col-span-5 flex justify-center items-start p-2">
               <BookNowPallet
                 room={guestData.room}
-                locationData={locationData}
+                bookingDetails={guestData}
                 button={false}
               />
             </div>

@@ -1,8 +1,14 @@
 import React from "react";
+import bg from "../../assets/Snapseed.jpg";
 
-const Info = ({ title, subtitle, description }) => {
+const Info = ({ title, subtitle, description, noGap }) => {
   return (
-    <section className="md:my-10 my-15 ">
+    <section
+      className={`my-15 ${
+        !noGap && "md:my-10"
+      }  bg-transparent bg-cover bg-center `}
+      style={{ backgroundImage: `url(${bg})` }}
+    >
       <div className="flex flex-col justify-center items-center">
         <h3 className="font-bold capitalize  text-gray-400 text-md">{title}</h3>
         <hr className="md:w-[10%] w-[20%] h-[4px] bg-orange-400 mb-2" />

@@ -15,7 +15,7 @@ const PaymentConfirmation = () => {
     <div className="w-full flex flex-col justify-center items-center mb-10">
       <Lottie options={defaultOptions} height={100} width={100} />
       <p className="capitalize text-[1.5em] font-bold ">
-        Your Payment has confirmed
+        Your Booking has been confirmed
       </p>
       <p className="capitalize text-[.8em]  ">Thanks for Choosing us!</p>
     </div>
