@@ -45,7 +45,7 @@ const Rooms = () => {
   };
 
   const handleCheckAvailability = () => {
-    fetchRoomsData(checkInDate.toISOString(), checkOutDate.toISOString());
+    fetchRoomsData();
   };
 
   const handleGuestCountChange = (e) => {
@@ -250,7 +250,9 @@ const Rooms = () => {
                 >
                   {roomNotAvailable && (
                     <marquee className="w-full text-sm h-full pt-4 text-white font-bold uppercase">
-                      {`Available on:  ${(" ", nearestEndDate)}`}
+                      {` CheckIn will be available on:  ${
+                        (" ", nearestEndDate)
+                      }`}
                     </marquee>
                   )}
                   {!roomNotAvailable && (

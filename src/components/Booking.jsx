@@ -5,7 +5,7 @@ import { BsTextarea } from "react-icons/bs";
 import { IoPeopleCircleOutline } from "react-icons/io5";
 import { GiLeafSwirl, GiMountains } from "react-icons/gi";
 import BookNowPallet from "./BookNowPallet";
-import BookingForm from "./BookingForm";
+import SignUp from "./SignUp";
 import { useSelector } from "react-redux";
 import bg from "../assets/Snapseed.jpg";
 
@@ -70,7 +70,7 @@ const Booking = () => {
                     </span>
                   </p>
                 </div>
-                <BookingForm guestData={guestData} />
+                <SignUp guestData={guestData} />
               </div>
             </div>
             <div className="md:col-span-2 col-span-5 flex justify-center items-start p-2">

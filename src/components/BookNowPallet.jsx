@@ -8,6 +8,7 @@ import {
   updateCheckInDate,
   updateCheckOutDate,
 } from "../redux/slices/userSlice";
+import Login from "./Login";
 
 const BookNowPallet = ({ bookingDetails, room, button }) => {
   const [checkInDate, setCheckInDate] = useState(bookingDetails?.checkInDate);
@@ -49,7 +50,6 @@ const BookNowPallet = ({ bookingDetails, room, button }) => {
       setMeals(mealsFromRedux);
     }
   }, [mealsFromRedux]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const guestData = {
@@ -64,7 +64,7 @@ const BookNowPallet = ({ bookingDetails, room, button }) => {
       room: room && room,
     };
     const roomName = room.heading.toLowerCase().replace(/\s+/g, "-");
-    navigate(`/booking/${roomName}-${room?._id}`);
+    navigate(`/checkout/${roomName}-${room?._id}`);
     dispatch(updateUserRoomBookingDetails(guestData));
   };
 
@@ -92,14 +92,23 @@ const BookNowPallet = ({ bookingDetails, room, button }) => {
     }));
   };
 
+  const getDaysCount = (startDate, endDate) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const timeDiff = Math.abs(end - start);
+    const diffDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    return diffDays;
+  };
+  const mealDays = getDaysCount(checkInDate, checkOutDate);
+  const [showModal, setShowModal] = useState(false);
+  const isLogIn = localStorage.getItem("token");
   const calculateTotalPrice = () => {
     let totalPrice = bookingDetails?.price
       ? bookingDetails?.price
       : room?.price;
-
     for (const meal in meals) {
       if (meals[meal].isChecked) {
-        totalPrice += meals[meal].price * adults;
+        totalPrice += meals[meal].price * adults * mealDays;
       }
     }
     return totalPrice;
@@ -111,7 +120,14 @@ const BookNowPallet = ({ bookingDetails, room, button }) => {
         <p>Sub Total</p>
         <p className="text-2xl font-bold mb-3">₹ {calculateTotalPrice()}</p>
         <form
-          onSubmit={handleSubmit}
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (isLogIn) {
+              handleSubmit(e);
+            } else {
+              setShowModal(true);
+            }
+          }}
           className="w-full flex flex-col justify-center items-center"
         >
           <div className="flex flex-wrap justify-center items-center w-full">
@@ -208,7 +224,7 @@ const BookNowPallet = ({ bookingDetails, room, button }) => {
                     />
                     {meal.charAt(0).toUpperCase() + meal.slice(1)}
                     <span className="text-green-500 pl-2">
-                      + ₹{data.price * adults}
+                      + ₹{data.price * adults * mealDays}
                     </span>
                   </label>
                 ))}
@@ -223,6 +239,7 @@ const BookNowPallet = ({ bookingDetails, room, button }) => {
         <h2>Booking Help</h2>
         <p className="font-bold text-xl">+91 123 456 7890</p>
       </div>
+      {showModal && <Login setShowModal={setShowModal} />}
     </section>
   );
 };

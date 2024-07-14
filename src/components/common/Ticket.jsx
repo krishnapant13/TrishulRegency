@@ -2,18 +2,17 @@ import React from "react";
 import { FaHotel } from "react-icons/fa6";
 import logo from "../../assets/Terrace Peaks.png";
 import bg from "../../assets/Snapseed.jpg";
-import Button from "../Button";
 
 const Ticket = ({ roomDetails, guestDetails }) => {
   const name = guestDetails?.firstName + " " + guestDetails?.lastName;
   return (
-    <div className="h-screen flex justify-center items-center md:p-0 bg-orange-400 p-2">
+    <div className="h-[30%] flex justify-center items-center md:p-0 bg-gray-300 p-2 overflow-scroll">
       <div
-        className="w-full md:w-[50%] h-auto md:h-[50%] bg-center bg-cover rounded-md relative overflow-hidden"
+        className="w-full md:w-[80%] mt-2 h-auto md:h-[50%] bg-center bg-cover rounded-md relative overflow-hidden"
         style={{ backgroundImage: `url(${bg})` }}
       >
-        <div className="absolute -left-9 top-1/2 -translate-y-1/2 w-16 h-16 bg-orange-400 rounded-full" />
-        <div className="absolute -right-9 top-1/2 -translate-y-1/2 w-16 h-16 bg-orange-400 rounded-full" />
+        <div className="absolute -left-9 top-1/2 -translate-y-1/2 w-16 h-16 bg-gray-300 rounded-full" />
+        <div className="absolute -right-9 top-1/2 -translate-y-1/2 w-16 h-16 bg-gray-300 rounded-full" />
         <div className="md:h-[30%] h-[25%] flex justify-center items-center w-full border-b-[1px] border-black ">
           <div className="flex-col  justify-center items-center w-full">
             <p className=" font-extrabold text-xl md:text-2xl uppercase text-center">
@@ -42,27 +41,27 @@ const Ticket = ({ roomDetails, guestDetails }) => {
               </h3>
               <p className="font-bold ">
                 Name:{" "}
-                <span className="font-normal"> {"Krishna Pant" || name}</span>
+                <span className="font-normal"> {name }</span>
               </p>
               <p className="font-bold ">
                 Country:{" "}
                 <span className="font-normal">
                   {" "}
-                  {"India" || guestDetails?.country}
+                  {guestDetails?.country }
                 </span>
               </p>
               <p className="font-bold ">
                 State:{" "}
                 <span className="font-normal">
                   {" "}
-                  {"Uttarakhand" || guestDetails?.state}
+                  {guestDetails?.state}
                 </span>
               </p>
               <p className="font-bold ">
                 Zip Code:{" "}
                 <span className="font-normal">
                   {" "}
-                  {"203639" || guestDetails?.zipCode}
+                  { guestDetails?.zipCode}
                 </span>
               </p>
               <p className="font-bold ">

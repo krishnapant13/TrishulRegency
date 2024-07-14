@@ -22,7 +22,7 @@ const RoomProvider = ({ children }) => {
     setCheckOutDate(nextDay);
   }, [bookingDetails]);
 
-  const fetchRoomsData = async (checkIn, checkOut) => {
+  const fetchRoomsData = async () => {
     try {
       const response = await axios.get(`${server}/room/check-availability`);
       setRoomData(response.data);

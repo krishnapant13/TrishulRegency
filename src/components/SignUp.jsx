@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "./Button";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import PhoneInput from "react-phone-input-2";
-import axios from "axios";
-import { server } from "../server";
 import { toast } from "react-toastify";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { addGuestDetails } from "../redux/slices/userSlice";
+import { AuthContext } from "./common/AuthContext";
+import { FaUser, FaUserAstronaut } from "react-icons/fa6";
+import Loader from "./Loader";
 
-const BookingForm = ({ guestData }) => {
+const SignUp = ({ guestData, setSignUpClick, setShowModal }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -23,12 +24,14 @@ const BookingForm = ({ guestData }) => {
     zipCode: "",
     additionMessage: "",
     couponCode: "",
+    avatar: null, // Initialize avatar state
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { signup } = useContext(AuthContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -68,6 +71,12 @@ const BookingForm = ({ guestData }) => {
       state: "",
     });
   };
+  const handleAvatarChange = (e) => {
+    setFormData({
+      ...formData,
+      avatar: e.target.files[0], // Store the selected file object
+    });
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (error) {
@@ -76,31 +85,29 @@ const BookingForm = ({ guestData }) => {
     }
     setLoading(true);
     try {
-      const response = await axios.post(
-        `${server}/guest/create-guest`,
-        formData
-      );
+      const formDataWithAvatar = new FormData(); // Create FormData object
+      Object.keys(formData).forEach((key) => {
+        formDataWithAvatar.append(key, formData[key]); // Append all form data
+      });
+      const response = await signup(formDataWithAvatar).then(() => {
+        setLoading(false);
+        setShowModal(false);
+      }); // Send FormData to signup function
       const roomName = guestData?.room.heading
         .toLowerCase()
         .replace(/\s+/g, "-");
       dispatch(addGuestDetails(response.data.user));
       navigate(`/checkout/${roomName}-${guestData?.room._id}`);
-      toast.success(response.data.message);
     } catch (error) {
-      if (error.response) {
-        const errorMessage = error.response.data.message;
-        toast.error(errorMessage);
-      } else if (error.request) {
-        toast.error("Please try again later.");
-      } else {
-        toast.error("An error occurred. Please try again later.");
-      }
+      toast.error(error);
     } finally {
       setLoading(false);
     }
   };
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <form className="mt-2" onSubmit={handleSubmit}>
       <div className="grid grid-cols-2 gap-4">
         <input
@@ -221,25 +228,54 @@ const BookingForm = ({ guestData }) => {
           className="p-2 border border-gray-300 w-full focus:outline-none"
           required
         />
-        <textarea
-          name="additionMessage"
-          value={formData.additionMessage}
-          onChange={handleChange}
-          placeholder="Additional Message"
-          className="p-2 border border-gray-300 w-full col-span-2 focus:outline-none"
-        ></textarea>
-        <input
-          type="number"
-          name="couponCode"
-          value={formData.couponCode}
-          onChange={handleChange}
-          placeholder="Coupon Code"
-          className="p-2 border border-gray-300 w-full focus:outline-none"
-        />
-        <Button title="book now" />
+        <div>
+          <label
+            htmlFor="avatar"
+            className="block text-sm font-medium text-gray-700"
+          ></label>
+          <div className="mt-2 flex items-center">
+            <span className="inline-block h-8 w-8 rounded-full overflow-hidden">
+              {formData?.avatar ? (
+                <img
+                  src={URL.createObjectURL(formData?.avatar)}
+                  alt="avatar"
+                  className="h-full w-full object-cover rounded-full"
+                />
+              ) : (
+                <FaUserAstronaut alt="avatar" className="h-8 w-8 " />
+              )}
+            </span>
+            <label
+              htmlFor="file-input"
+              className="ml-5 flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+            >
+              <span className="cursor-pointer">Uplod an Image</span>
+              <input
+                type="file"
+                name="avatar"
+                id="file-input"
+                accept=".jpg,.jpeg,.png"
+                onChange={handleAvatarChange}
+                className="sr-only"
+                required
+              />
+            </label>
+          </div>
+        </div>
+
+        <Button title="Sign up" />
+      </div>
+      <div className="text-sm text-center mt-4">
+        <span>Already have an account? </span>
+        <span
+          onClick={() => setSignUpClick(false)}
+          className="text-blue-500 cursor-pointer"
+        >
+          Login
+        </span>
       </div>
     </form>
   );
 };
 
-export default BookingForm;
+export default SignUp;

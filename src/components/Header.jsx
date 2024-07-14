@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import whiteLogo from "../assets/TerracePeaksWhite.png";
 import blackLogo from "../assets/Terrace Peaks.png";
 import noUser from "../assets/noUser.jpeg";
+import { useSelector } from "react-redux";
 
 const Header = ({ name, navOnly }) => {
   const [scrolled, setScrolled] = useState(false);
+  const isLogIn = localStorage.getItem("token");
+  const user = useSelector((state) => state?.user?.guestDetails);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,7 +45,7 @@ const Header = ({ name, navOnly }) => {
         className={` md:fixed  absolute
          top-5 flex md:justify-between  justify-end  pr-2 md:pr-0 items-center md:w-[70%] w-full transition-all duration-150 ease-linear ${
            scrolled &&
-           "md:bg-white md:rounded-full md:shadow-xl md:px-10 md:z-[50]"
+           "md:bg-white md:rounded-full md:shadow-xl md:px-10 md:z-[53]"
          }`}
       >
         <Link to="/" className="md:w-[25%] w-[40%] cursor-pointer">
@@ -82,10 +85,16 @@ const Header = ({ name, navOnly }) => {
           </li>
         </ul>
         <Link
-          to="/profile"
-          className=" w-10 h-10 rounded-full overflow-hidden cursor-pointer md:mr-10 md:ml-0 ml-16 shadow-xl"
+          to={isLogIn ? "/profile" : ""}
+          className={`w-10 h-10 rounded-full overflow-hidden md:mr-10 md:ml-0 ml-16 ${
+            isLogIn ? "shadow-xl  cursor-pointer" : "cursor-default "
+          } `}
         >
-          <img src={noUser} alt="No User" className="bg-cover bg-center" />
+          <img
+            src={user && isLogIn ? user.avatar : noUser}
+            alt="No User"
+            className="bg-cover bg-center"
+          />
         </Link>
       </div>
       {!navOnly && (
