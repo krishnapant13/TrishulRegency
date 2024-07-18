@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/TerracePeaks/static/css/main.9963ec73.css",
-    "main.js": "/TerracePeaks/static/js/main.7d8a9506.js",
+    "main.js": "/TerracePeaks/static/js/main.671896d3.js",
     "static/js/213.1bf25618.chunk.js": "/TerracePeaks/static/js/213.1bf25618.chunk.js",
     "static/js/455.20155f68.chunk.js": "/TerracePeaks/static/js/455.20155f68.chunk.js",
     "static/js/453.273f6bb3.chunk.js": "/TerracePeaks/static/js/453.273f6bb3.chunk.js",
@@ -15,13 +15,13 @@
     "static/media/slick.woff": "/TerracePeaks/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/TerracePeaks/index.html",
     "main.9963ec73.css.map": "/TerracePeaks/static/css/main.9963ec73.css.map",
-    "main.7d8a9506.js.map": "/TerracePeaks/static/js/main.7d8a9506.js.map",
+    "main.671896d3.js.map": "/TerracePeaks/static/js/main.671896d3.js.map",
     "213.1bf25618.chunk.js.map": "/TerracePeaks/static/js/213.1bf25618.chunk.js.map",
     "455.20155f68.chunk.js.map": "/TerracePeaks/static/js/455.20155f68.chunk.js.map",
     "453.273f6bb3.chunk.js.map": "/TerracePeaks/static/js/453.273f6bb3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9963ec73.css",
-    "static/js/main.7d8a9506.js"
+    "static/js/main.671896d3.js"
   ]
 }
