@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/TrishulRegency/static/css/main.f8b9b4f7.css",
-    "main.js": "/TrishulRegency/static/js/main.88c6fa94.js",
+    "main.js": "/TrishulRegency/static/js/main.69db81b6.js",
     "static/js/213.1bf25618.chunk.js": "/TrishulRegency/static/js/213.1bf25618.chunk.js",
     "static/js/455.76878bec.chunk.js": "/TrishulRegency/static/js/455.76878bec.chunk.js",
     "static/js/453.273f6bb3.chunk.js": "/TrishulRegency/static/js/453.273f6bb3.chunk.js",
@@ -15,13 +15,13 @@
     "static/media/slick.woff": "/TrishulRegency/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/TrishulRegency/index.html",
     "main.f8b9b4f7.css.map": "/TrishulRegency/static/css/main.f8b9b4f7.css.map",
-    "main.88c6fa94.js.map": "/TrishulRegency/static/js/main.88c6fa94.js.map",
+    "main.69db81b6.js.map": "/TrishulRegency/static/js/main.69db81b6.js.map",
     "213.1bf25618.chunk.js.map": "/TrishulRegency/static/js/213.1bf25618.chunk.js.map",
     "455.76878bec.chunk.js.map": "/TrishulRegency/static/js/455.76878bec.chunk.js.map",
     "453.273f6bb3.chunk.js.map": "/TrishulRegency/static/js/453.273f6bb3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f8b9b4f7.css",
-    "static/js/main.88c6fa94.js"
+    "static/js/main.69db81b6.js"
   ]
 }
