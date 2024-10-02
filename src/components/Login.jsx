@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import SignUp from "./SignUp";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,6 +14,20 @@ const Login = ({ setShowModal }) => {
     email: "",
     password: "",
   });
+  const modalRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      setShowModal(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -41,7 +55,12 @@ const Login = ({ setShowModal }) => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="bg-white p-4 rounded-lg w-[50%] flex flex-col justify-between">
+        <div
+          className={`bg-white p-4 rounded-lg w-[90%] md:w-[50%] flex flex-col justify-between overflow-scroll ${
+            signUpClick ? "h-[90vh] md:h-auto" : "h-fit md:h-auto"
+          }`}
+          ref={modalRef}
+        >
           {signUpClick ? (
             <SignUp
               setSignUpClick={setSignUpClick}

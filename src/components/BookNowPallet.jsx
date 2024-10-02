@@ -117,6 +117,7 @@ const BookNowPallet = ({ bookingDetails, room, button }) => {
   return (
     <section className="flex flex-col justify-center items-center w-full">
       <div className="mt-5 py-10 md:w-[90%] w-full bg-orange-100 flex flex-col justify-center items-center md:mt-1">
+        <p className="font-extrabold text-center w-full text-2xl">Booking Details</p>
         <p>Sub Total</p>
         <p className="text-2xl font-bold mb-3">₹ {calculateTotalPrice()}</p>
         <form
@@ -144,6 +145,7 @@ const BookNowPallet = ({ bookingDetails, room, button }) => {
                   dateFormat="d MMM, yyyy"
                   placeholderText="Select a date"
                   className="p-3 focus:outline-none text-gray-400 w-full"
+                  disabled
                 />
               </div>
             </div>
@@ -164,6 +166,7 @@ const BookNowPallet = ({ bookingDetails, room, button }) => {
                   dateFormat="d MMM, yyyy"
                   placeholderText="Select a date"
                   className="p-3 focus:outline-none text-gray-400 w-full"
+                  disabled
                 />
               </div>
             </div>
@@ -179,6 +182,7 @@ const BookNowPallet = ({ bookingDetails, room, button }) => {
                   value={adults}
                   onChange={(e) => setAdultsCount(e.target.value)}
                   className="focus:outline-none p-3 w-full"
+                  disabled
                 />
               </div>
             </div>
@@ -190,7 +194,7 @@ const BookNowPallet = ({ bookingDetails, room, button }) => {
                 <input
                   type="number"
                   id="children"
-                  max={3}
+                  max={2}
                   value={children}
                   onChange={(e) => setChildrenCount(e.target.value)}
                   className="focus:outline-none p-3 w-full"

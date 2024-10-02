@@ -2,8 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   bookingDetails: null,
-  guestDetails: null,
-  bookedRoom: null,
+  userDetails: null,
   status: "idle",
   error: null,
 };
@@ -15,6 +14,9 @@ export const userSlice = createSlice({
     updateUserRoomBookingDetails: (state, action) => {
       state.bookingDetails = action.payload;
     },
+    updateGuestDetails: (state, action) => {
+      state.bookingDetails.guests = action.payload;
+    },
     updateCheckInDate: (state, action) => {
       state.bookingDetails.checkInDate = action.payload;
     },
@@ -22,10 +24,13 @@ export const userSlice = createSlice({
       state.bookingDetails.checkOutDate = action.payload;
     },
     addGuestDetails: (state, action) => {
-      state.guestDetails = action.payload;
+      state.userDetails = action.payload;
     },
-    updateBookedRoom: (state, action) => {
-      state.bookedRoom = action.payload;
+    updateBookedRooms: (state, action) => {
+      state.userDetails.bookedRooms = [
+        ...state.userDetails.bookedRooms,
+        action.payload,
+      ];
     },
     setStatus: (state, action) => {
       state.status = action.payload;
@@ -41,7 +46,8 @@ export const {
   updateCheckInDate,
   updateCheckOutDate,
   addGuestDetails,
-  updateBookedRoom,
+  updateGuestDetails,
+  updateBookedRooms,
   setStatus,
   setError,
 } = userSlice.actions;

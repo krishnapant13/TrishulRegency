@@ -93,7 +93,7 @@ const RoomDetails = () => {
           content={
             room
               ? `${room.description}. Book now to experience ${room.heading}!`
-              : "Explore our available rooms and book your stay at Terrace Peaks."
+              : "Explore our available rooms and book your stay at The Trishul Regency ."
           }
         />
         {room && (

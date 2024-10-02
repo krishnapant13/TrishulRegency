@@ -2,7 +2,10 @@ import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
-import { addGuestDetails } from "../../redux/slices/userSlice";
+import {
+  addGuestDetails,
+  updateUserRoomBookingDetails,
+} from "../../redux/slices/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -33,6 +36,7 @@ const AuthProvider = ({ children }) => {
       axios.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${response.data.token}`;
+      return response;
     } catch (error) {
       if (
         error.response &&
@@ -57,15 +61,17 @@ const AuthProvider = ({ children }) => {
       axios.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${response.data.token}`;
+      return response;
     } catch (error) {
-      toast.error(error);
-      console.log(error);
+      toast.error(error?.response?.data?.message);
     }
   };
 
   const logout = () => {
     setToken(null);
     setUser(null);
+    dispatch(updateUserRoomBookingDetails({}));
+    dispatch(addGuestDetails());
     localStorage.removeItem("token");
     delete axios.defaults.headers.common["Authorization"];
   };

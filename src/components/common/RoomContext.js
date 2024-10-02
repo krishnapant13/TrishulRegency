@@ -34,18 +34,22 @@ const RoomProvider = ({ children }) => {
   };
 
   const updateBookedDates = (roomId, newBooking) => {
-    setRoomData((prevRoomData) => {
-      if (!Array.isArray(prevRoomData)) return prevRoomData;
-      return prevRoomData.map((room) => {
-        if (room._id === roomId) {
-          return {
-            ...room,
-            bookedDates: [...room.bookedDates, newBooking],
-          };
-        }
-        return room;
+    try {
+      setRoomData((prevRoomData) => {
+        if (!Array.isArray(prevRoomData)) return prevRoomData;
+        return prevRoomData.map((room) => {
+          if (room._id === roomId) {
+            return {
+              ...room,
+              bookedDates: [...room.bookedDates, newBooking],
+            };
+          }
+          return room;
+        });
       });
-    });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

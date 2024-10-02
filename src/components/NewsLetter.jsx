@@ -8,7 +8,7 @@ const NewsLetter = () => {
         className="bg-cover bg-center h-fit p-10 w-full flex flex-col justify-center items-center "
         style={{
           backgroundImage:
-            "url('https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg')",
+            "url('https://res.cloudinary.com/dutkerqvn/image/upload/v1726290441/Room_urvbrx.jpg')",
         }}
         aria-hidden="true"
       >

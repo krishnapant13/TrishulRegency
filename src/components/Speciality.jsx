@@ -56,7 +56,7 @@ const Speciality = () => {
       <Info
         title="We are awesome"
         subtitle=" Our Speciality"
-        description=" Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore provident vero, debitis."
+        description=" Experience unique flavors and local delicacies crafted to perfection."
       />
       <div className="grid md:grid-cols-3 grid-cols-4 md:w-[70%] w-[90%] m-auto">
         {specialties.map((specialty, index) => (

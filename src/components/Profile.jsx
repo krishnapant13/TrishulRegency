@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Ticket from "./common/Ticket";
 import noUser from "../assets/noUser.jpeg";
 import { useSelector } from "react-redux";
@@ -6,24 +6,42 @@ import Header from "./Header";
 import { BsPencilFill } from "react-icons/bs";
 import Button from "./Button";
 import { AuthContext } from "./common/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { server } from "../server";
+import axios from "axios";
 const Profile = () => {
-  const [activeTab, setActiveTab] = useState("profile");
-  const user = useSelector((state) => state?.user?.guestDetails);
+  const { id } = useParams(); // Get the user ID from the URL params
+  const [user, setUser] = useState(null);
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    firstName: user?.firstName,
-    lastName: user.lastName,
-    email: user.emailAddress,
-    phoneNumber: user?.phoneNumber,
-    address: user?.address,
-    zipCode: user?.zipCode,
-    state: user?.state,
-    country: user?.country,
-    gender: "",
-  });
+  const [formData, setFormData] = useState({});
+  const [activeAccordion, setActiveAccordion] = useState(null);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(`${server}/guest/get-guest/${id}`);
+        setUser(response.data?.guest);
+        setFormData({
+          firstName: response.data?.guest?.firstName,
+          lastName: response.data?.guest?.lastName,
+          email: response.data?.guest?.emailAddress,
+          phoneNumber: response.data?.guest?.phoneNumber,
+          address: response.data?.guest?.address,
+          zipCode: response.data?.guest?.zipCode,
+          state: response.data?.guest?.state,
+          country: response.data?.guest?.country,
+          gender: response.data?.guest?.gender || "",
+        });
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
 
+    fetchUserData();
+  }, [id]);
+  const toggleAccordion = (index) => {
+    setActiveAccordion(activeAccordion === index ? null : index);
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -54,174 +72,250 @@ const Profile = () => {
 
   return (
     <div>
-      {/* <Header navOnly /> */}
-      <div className="flex flex-col md:flex-row p-4 md:px-[10em]">
-        <div className="w-full md:w-1/4 mb-4 md:mb-0">
-          <h1 className="text-2xl font-bold">User Profile</h1>
-          {/* Tab Section */}
-          <div className="mt-4">
-            <button
-              className={`w-full p-2 rounded ${
-                activeTab === "profile"
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200"
-              }`}
-              onClick={() => setActiveTab("profile")}
-            >
-              Profile Details
-            </button>
-            <button
-              className={`w-full p-2 rounded ${
-                activeTab === "booking"
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200"
-              } mt-2`}
-              onClick={() => setActiveTab("booking")}
-            >
-              Booking Details
-            </button>
-            <div onClick={() => handleLogout()}>
-              <Button title="Logout" />
+      <Header navOnly />
+      <div className=" flex flex-col justify-center items-center mt-20">
+        <p className="text-2xl w-[80%] text-start font-bold">User Profile</p>
+        <div className="w-full flex justify-evenly items-center p-4 bg-white">
+          <div className="flex mb-4 flex-col justify-center items-center">
+            <div className="relative">
+              <img
+                src={user ? user.avatar : noUser}
+                alt="Profile"
+                className="w-40 h-40 rounded-full"
+              />
+              {/* <div className="absolute -right-0 bottom-2 flex justify-center items-center rounded-full p-1 bg-orange-400  shadow-md cursor-pointer">
+                <BsPencilFill color="white" size={12} className="" />
+              </div> */}
+            </div>
+            <div className="flex  flex-col justify-center items-center mx-4 font-bold">
+              <p className=" font-extrabold">
+                {user?.firstName + " " + user?.lastName}
+              </p>
+              <p>{user?.state + ", " + user?.country}</p>
             </div>
           </div>
-        </div>
-
-        {/* Details Section */}
-        <div className="w-full md:w-3/4 p-4">
-          {activeTab === "profile" && (
-            <div>
-              <div className="flex mb-4 flex-row ">
-                <div className="relative">
-                  <img
-                    src={user ? user.avatar : noUser}
-                    alt="Profile"
-                    className="w-20 h-20 rounded-full"
-                  />
-                  <div className="absolute -right-0 bottom-2 flex justify-center items-center rounded-full p-1 bg-orange-400  shadow-md cursor-pointer">
-                    <BsPencilFill color="white" size={12} className="" />
-                  </div>
-                </div>
-                <div className="flex  flex-col justify-center items-start mx-4 font-bold">
-                  <p>{user?.firstName + " " + user?.lastName}</p>
-                  <p>{user?.state + ", " + user?.country}</p>
-                </div>
+          <div className="h-full w-[0.05em] bg-slate-300"></div>
+          <form onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div>
+                <input
+                  type="text"
+                  placeholder="First Name"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  className="w-full p-2 border border-gray-300 rounded  focus:outline-none"
+                />
               </div>
-              <h2 className="text-lg font-semibold mb-4">Account Details</h2>
-              <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="First Name"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      className="w-full p-2 border border-gray-300 rounded  focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Last Name"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      className="w-full p-2 border border-gray-300 rounded  focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full p-2 border border-gray-300 rounded  focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Phone Number"
-                      name="phoneNumber"
-                      value={formData.phoneNumber}
-                      onChange={handleChange}
-                      className="w-full p-2 border border-gray-300 rounded  focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="number"
-                      placeholder="Zip Code"
-                      name="zipCode"
-                      value={formData.zipCode}
-                      onChange={handleChange}
-                      className="w-full p-2 border border-gray-300 rounded  focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="state"
-                      name="state"
-                      value={formData.state}
-                      onChange={handleChange}
-                      className="w-full p-2 border border-gray-300 rounded  focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="country"
-                      name="country"
-                      value={formData.country}
-                      onChange={handleChange}
-                      className="w-full p-2 border border-gray-300 rounded  focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="address"
-                      name="address"
-                      value={formData.address}
-                      onChange={handleChange}
-                      className="w-full p-2 border border-gray-300 rounded  focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="gender" className="block mb-1">
-                      Gender:
-                    </label>
-                    <select
-                      id="gender"
-                      name="gender"
-                      value={formData.gender}
-                      onChange={handleChange}
-                      className="w-full p-2 border border-gray-300 rounded  focus:outline-none"
-                    >
-                      <option value="">Select Gender</option>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                </div>
-                <button
-                  type="submit"
-                  className="bg-blue-500 text-white py-2 px-4 rounded mt-4"
+              <div>
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  className="w-full p-2 border border-gray-300 rounded  focus:outline-none"
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full p-2 border border-gray-300 rounded  focus:outline-none"
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Phone Number"
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
+                  onChange={handleChange}
+                  className="w-full p-2 border border-gray-300 rounded  focus:outline-none"
+                />
+              </div>
+              <div>
+                <input
+                  type="number"
+                  placeholder="Zip Code"
+                  name="zipCode"
+                  value={formData.zipCode}
+                  onChange={handleChange}
+                  className="w-full p-2 border border-gray-300 rounded  focus:outline-none"
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="state"
+                  name="state"
+                  value={formData.state}
+                  onChange={handleChange}
+                  className="w-full p-2 border border-gray-300 rounded  focus:outline-none"
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="country"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                  className="w-full p-2 border border-gray-300 rounded  focus:outline-none"
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="address"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  className="w-full p-2 border border-gray-300 rounded  focus:outline-none"
+                />
+              </div>
+              <div>
+                <select
+                  id="gender"
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleChange}
+                  className="w-full p-2 border border-gray-300 rounded  focus:outline-none"
                 >
-                  Update
-                </button>
-              </form>
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <button
+                type="submit"
+                className="bg-blue-500 text-white py-2 px-4 rounded "
+              >
+                Update
+              </button>
+              <button
+                type="submit"
+                className="bg-blue-500 text-white py-2 px-4 rounded "
+                onClick={() => handleLogout()}
+              >
+                Logout
+              </button>
             </div>
-          )}
-          {/* Add another tab content for booking details */}
-          {activeTab === "booking" && (
-            <div>
-              <h2 className="text-lg font-semibold mb-4">Booking Details</h2>
-              <Ticket guestDetails={user} />
-            </div>
+          </form>
+        </div>
+        <div className="w-[50%]">
+          <h2 className="text-lg font-semibold mb-4">Booking Details</h2>
+
+          {user?.bookedRooms?.length >= 1 ? (
+            user.bookedRooms.map((room, index) => (
+              <div
+                key={index}
+                className="accordion border border-gray-300 rounded-lg mb-4"
+              >
+                <h2 className="accordion-header mb-0">
+                  <button
+                    className="accordion-button collapsed w-full text-left p-4 bg-gray-100 hover:bg-gray-200 focus:outline-none"
+                    type="button"
+                    onClick={() => toggleAccordion(index)}
+                  >
+                    <div className="flex justify-between items-center w-full">
+                      <span className="font-semibold">
+                        {room?.bookingDetails?.room?.heading} -{" "}
+                        {room?.bookingDetails?.room?.subheading}
+                      </span>
+                      <span className="text-black">
+                        {new Date(
+                          room.bookingDetails?.checkInDate
+                        ).toLocaleDateString()}{" "}
+                        to{" "}
+                        {new Date(
+                          room.bookingDetails?.checkOutDate
+                        ).toLocaleDateString()}
+                      </span>
+                      <span>{activeAccordion === index ? "-" : "+"}</span>
+                    </div>
+                  </button>
+                </h2>
+                {activeAccordion === index && (
+                  <div className="accordion-body p-4 bg-white rounded-b-lg duration-300 ease-linear">
+                    <table className="min-w-full table-auto border-collapse border border-gray-300">
+                      <thead className="bg-gray-200">
+                        <tr>
+                          <th className="border border-gray-300 px-4 py-2 text-left">
+                            Category
+                          </th>
+                          <th className="border border-gray-300 px-4 py-2 text-left">
+                            Details
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="border border-gray-300 px-4 py-2">
+                            Guests
+                          </td>
+                          <td className="border border-gray-300 px-4 py-2">
+                            {room.bookingDetails?.guestCount}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 px-4 py-2">
+                            Room Price
+                          </td>
+                          <td className="border border-gray-300 px-4 py-2">
+                            ₹{room.bookingDetails?.room?.price}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 px-4 py-2">
+                            Calculated Price
+                          </td>
+                          <td className="border border-gray-300 px-4 py-2">
+                            ₹{room.bookingDetails?.calculatedPrice}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 px-4 py-2">
+                            Meals Included
+                          </td>
+                          <td className="border border-gray-300 px-4 py-2">
+                            <ul className="list-disc list-inside">
+                              {Object.entries(room.bookingDetails?.meals)
+                                .filter(([key, value]) => value.isChecked)
+                                .map(([key, value]) => (
+                                  <li key={key}>
+                                    {value.name}: ₹{value.price}
+                                  </li>
+                                ))}
+                            </ul>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 px-4 py-2">
+                            Room Facilities
+                          </td>
+                          <td className="border border-gray-300 px-4 py-2">
+                            <ul className="list-disc list-inside">
+                              {room.bookingDetails?.room.facility.map(
+                                (facility, i) => (
+                                  <li key={i}>{facility}</li>
+                                )
+                              )}
+                            </ul>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            ))
+          ) : (
+            <p>No Rooms Booked Currently</p>
           )}
         </div>
       </div>

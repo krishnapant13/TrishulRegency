@@ -7,7 +7,11 @@ const Footer = () => {
   return (
     <footer className="w-full bg-black text-white">
       <div className="container mx-auto pt-10 flex flex-col md:flex-row items-center justify-center">
-        <img src={logo} alt="Terrace Peaks Logo" className="w-[25%] md:mr-10" />
+        <img
+          src={logo}
+          alt="Trishul Regency Logo"
+          className="w-[25%] md:mr-10"
+        />
         <nav className="md:mr-10">
           <ul>
             <li>About</li>
@@ -49,8 +53,7 @@ const Footer = () => {
         </a>
       </div>
       <p className="text-center">
-        &copy; Terrace Peaks Restaurant | All Rights Reserved | Made by: Krishna
-        Pant (@nth__user)
+        &copy; The Trishul Regency | All Rights Reserved | Developed By @nth__user
       </p>
     </footer>
   );

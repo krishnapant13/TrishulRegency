@@ -1,14 +1,14 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import whiteLogo from "../assets/TerracePeaksWhite.png";
-import blackLogo from "../assets/Terrace Peaks.png";
+import blackLogo from "../assets/TrishulRegency.png";
 import noUser from "../assets/noUser.jpeg";
 import { useSelector } from "react-redux";
 
-const Header = ({ name, navOnly }) => {
+const Header = ({ name, navOnly, description }) => {
   const [scrolled, setScrolled] = useState(false);
   const isLogIn = localStorage.getItem("token");
-  const user = useSelector((state) => state?.user?.guestDetails);
+  const user = useSelector((state) => state?.user?.userDetails);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,7 +51,7 @@ const Header = ({ name, navOnly }) => {
         <Link to="/" className="md:w-[25%] w-[40%] cursor-pointer">
           <img
             src={navOnly || scrolled ? blackLogo : whiteLogo}
-            alt="Terrace Peaks Logo"
+            alt="Trishul Regency  Logo"
           />
         </Link>
         <ul className="justify-center items-center hidden md:flex">
@@ -85,7 +85,7 @@ const Header = ({ name, navOnly }) => {
           </li>
         </ul>
         <Link
-          to={isLogIn ? "/profile" : ""}
+          to={isLogIn && user ? `/profile/${user?._id}` : ""}
           className={`w-10 h-10 rounded-full overflow-hidden md:mr-10 md:ml-0 ml-16 ${
             isLogIn ? "shadow-xl  cursor-pointer" : "cursor-default "
           } `}
@@ -93,7 +93,7 @@ const Header = ({ name, navOnly }) => {
           <img
             src={user && isLogIn ? user.avatar : noUser}
             alt="No User"
-            className="bg-cover bg-center"
+            className="bg-cover bg-center w-full h-full"
           />
         </Link>
       </div>
@@ -103,7 +103,7 @@ const Header = ({ name, navOnly }) => {
             {name}
           </h1>
           <p className="md:block hidden tracking-widest capitalize text-center text-white">
-            Elevate Your Stay Amidst Nature's Beauty
+            {description}
           </p>
         </div>
       )}

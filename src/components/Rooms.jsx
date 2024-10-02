@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import NewsLetter from "./NewsLetter";
 import Footer from "./Footer";
 import Header from "./Header";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import bg from "../assets/Snapseed.jpg";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,14 +24,18 @@ const Rooms = () => {
   const [guestCount, setGuestCount] = useState(2);
   const [showCheckInDatePicker, setShowCheckInDatePicker] = useState(false);
   const [showCheckoutDatePicker, setShowCheckoutDatePicker] = useState(false);
+  const location = useLocation();
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   }, []);
+  useEffect(() => {
+    fetchRoomsData();
+  }, [location]);
+
   const dispatch = useDispatch();
-  console.log("roomData", roomData);
   const handleCheckInDateSelect = (date) => {
     setCheckInDate(date);
     const nextDay = new Date(date);
@@ -42,10 +46,6 @@ const Rooms = () => {
   const handleCheckOutDateSelect = (date) => {
     setCheckOutDate(date);
     setShowCheckoutDatePicker(false);
-  };
-
-  const handleCheckAvailability = () => {
-    fetchRoomsData();
   };
 
   const handleGuestCountChange = (e) => {
@@ -111,24 +111,27 @@ const Rooms = () => {
         formattedCheckInDate
     );
     const bookedRoomCount = bookingsOnCheckInDate.length;
-    const availableRooms = 3 - bookedRoomCount;
+    const availableRooms = 4 - bookedRoomCount;
     return availableRooms >= 0 ? availableRooms : 0;
   };
 
   return (
     <>
       <Helmet>
-        <title>Terrace Peaks - Rooms</title>
+        <title>Trishul Regency - Rooms</title>
         <meta
           name="description"
-          content="Explore our available rooms and book your stay at Terrace Peaks ."
+          content="Explore our available rooms and book your stay at Trishul Regency  ."
         />
       </Helmet>
       <div className="relative h-screen w-full">
-        <Header name="Rooms" />
+        <Header
+          name="Rooms"
+          description="Explore our range of comfortable, elegant rooms designed for your perfect getaway"
+        />
         <div className="z-50 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[95%] md:w-[55%] lg:w-[80%] h-[15vh] lg:h-[8vh] xl:h-[15vh] xl:w-[55%] bg-black shadow-xl flex justify-center items-center">
-          <div className=" flex flex-col justify-center items-center bg-white w-full h-full">
-            <p className=" text-[0.7em] font-bold text-gray-500 w-full text-start pl-5 uppercase">
+          <div className=" flex flex-col justify-center items-center bg-white w-[80%] h-full">
+            <p className=" text-[0.5em] font-bold text-gray-500 w-full text-start pl-5 uppercase">
               check in
             </p>
             <div className="flex justify-center items-center w-full">
@@ -136,7 +139,7 @@ const Rooms = () => {
                 <span className=" font-bold md:text-xl text-sm">
                   {checkInDate ? checkInDate.getDate() : 12}
                 </span>
-                <span className="text-sm md:text-lg">
+                <span className="text-[0.6em] md:text-lg">
                   {checkInDate
                     ? " / " +
                       checkInDate.toLocaleDateString("en-US", {
@@ -165,8 +168,8 @@ const Rooms = () => {
               )}
             </div>
           </div>{" "}
-          <div className=" flex flex-col justify-center items-center bg-white w-full h-full">
-            <p className=" text-[0.7em] font-bold text-gray-500 w-full text-start pl-5 uppercase">
+          <div className=" flex flex-col justify-center items-center bg-white w-[80%] h-full">
+            <p className=" text-[0.5em] font-bold text-gray-500 w-full text-start pl-5 uppercase">
               check out
             </p>
             <div className="flex justify-center items-center w-full">
@@ -174,7 +177,7 @@ const Rooms = () => {
                 <span className="font-bold md:text-xl text-sm">
                   {checkOutDate ? checkOutDate.getDate() : 12}
                 </span>
-                <span className="text-sm md:text-lg">
+                <span className="text-[0.5em] md:text-lg">
                   {checkOutDate
                     ? " / " +
                       checkOutDate.toLocaleDateString("en-US", {
@@ -205,24 +208,27 @@ const Rooms = () => {
               )}
             </div>
           </div>
-          <div className=" flex flex-col justify-center items-center bg-white w-full h-full">
-            <p className=" text-[0.7em] font-bold text-gray-500 text-center w-full uppercase">
+          <div className=" flex flex-col justify-center items-center bg-white  h-full">
+            <p className=" text-[0.8em] font-bold text-gray-500 text-center w-full hidden md:block uppercase">
               Guest Count
+            </p>
+            <p className="mb-3 text-[0.5em] font-bold block md:hidden text-gray-500 text-center w-full uppercase">
+              Guests
             </p>
             <input
               type="number"
               max={3}
               value={guestCount}
-              className=" font-bold md:text-[1.5em] w-full text-center focus:outline-none"
+              className=" font-bold md:text-[1.2em] w-full text-center focus:outline-none"
               onChange={(e) => handleGuestCountChange(e)}
             />
           </div>
-          <button
+          {/* <button
             onClick={handleCheckAvailability}
-            className=" bg-gradient-to-r from-orange-400 via-orange-500 to-red-400 text-white text-xs md:text-xl font-extrabold h-full md:px-10 uppercase "
+            className=" w-full bg-gradient-to-r from-orange-400 via-orange-500 to-red-400 text-white text-xs md:text-xl font-extrabold h-full md:px-10 uppercase "
           >
             Check
-          </button>
+          </button> */}
         </div>
 
         <div
@@ -238,9 +244,7 @@ const Rooms = () => {
                 className={` relative h-[33em] max-w-sm mx-4 mb-8 bg-white ${
                   roomNotAvailable ? "" : " rounded-lg shadow-md cursor-pointer"
                 }  overflow-hidden  `}
-                onClick={() =>
-                  isRoomAvailable(room.bookedDates) && handleRoomClick(room)
-                }
+                onClick={() => !roomNotAvailable && handleRoomClick(room)}
               >
                 <div
                   className={`w-full h-[15em] ${
