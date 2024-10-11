@@ -34,7 +34,7 @@ const About = () => {
               We are awesome
             </h3>
             <h1 className="font-bold uppercase text-2xl text-center">
-              Welcome to The Trishul Regency !
+              Welcome to Hotel Trishul Regency !
             </h1>
             <h5 className="font-bold uppercase text-sm text-gray-400 tracking-widest text-center">
               Hotel | Restaurents

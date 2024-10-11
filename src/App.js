@@ -30,7 +30,7 @@ function App() {
     >
       <AuthProvider>
         <RoomProvider>
-          <BrowserRouter basename="/TrishulRegency">
+          <BrowserRouter basename="/">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/rooms" element={<Rooms />} />

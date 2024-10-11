@@ -260,7 +260,7 @@ const Rooms = () => {
                     </marquee>
                   )}
                   {!roomNotAvailable && (
-                    <p className="absolute bottom-2 left-5 text-white font-bold uppercase">
+                    <p className="absolute bottom-2 left-5 text-red-500 font-bold uppercase">
                       {`Available Rooms: ${availableRoomCount(room)}`}
                     </p>
                   )}

@@ -4,7 +4,7 @@ import bg from "../../assets/Snapseed.jpg";
 const Info = ({ title, subtitle, description, noGap }) => {
   return (
     <section
-      className={`my-15 ${
+      className={`my-15 md:mt-0 mt-72 ${
         !noGap && "md:my-10"
       }  bg-transparent bg-cover bg-center `}
       style={{ backgroundImage: `url(${bg})` }}

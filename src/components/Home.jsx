@@ -22,9 +22,71 @@ const Home = ({ roomData }) => {
   //   });
   // }, []);
   const images = [
-    "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
-    "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
-    "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+    "https://res.cloudinary.com/dutkerqvn/image/upload/v1727939174/IMG_8866_o3bj0x.jpg",
+    "https://res.cloudinary.com/dutkerqvn/image/upload/v1727933766/IMG_E8119_wgsjog.jpg",
+    "https://res.cloudinary.com/dutkerqvn/image/upload/v1727934267/IMG_8864_f64zan.jpg",
+    "https://res.cloudinary.com/dutkerqvn/image/upload/v1727934558/tsaubq1j0ybf8wmia1k7.jpg",
+  ];
+  const reviews = [
+    {
+      name: "Amit Sharma",
+      profession: "Software Engineer",
+      comment:
+        "Amazing stay! The views were breathtaking, and the service was impeccable.",
+    },
+    {
+      name: "Priya Mehta",
+      profession: "Doctor",
+      comment:
+        "A peaceful getaway with fantastic amenities. Highly recommend Trishul Regency.",
+    },
+    {
+      name: "Rahul Verma",
+      profession: "Business Analyst",
+      comment:
+        "Luxurious rooms with beautiful surroundings. Perfect for a relaxing vacation.",
+    },
+    {
+      name: "Anjali Singh",
+      profession: "Interior Designer",
+      comment:
+        "Loved the ambiance and the hospitality. I will definitely come back!",
+    },
+    {
+      name: "Vikram Patel",
+      profession: "Entrepreneur",
+      comment: "Great service and a perfect place to unwind in nature.",
+    },
+    {
+      name: "Neha Kapoor",
+      profession: "Teacher",
+      comment:
+        "The hotel is well-maintained with friendly staff. A memorable experience!",
+    },
+    {
+      name: "Rajesh Gupta",
+      profession: "Photographer",
+      comment:
+        "Stunning views and excellent facilities. Perfect for a photography retreat.",
+    },
+    {
+      name: "Radhika Iyer",
+      profession: "Writer",
+      comment:
+        "A perfect spot to find inspiration. The surroundings are serene and beautiful.",
+    },
+    {
+      name: "Suresh",
+      profession: "Architect",
+      comment:
+        "The rooms are spacious and well-designed. Loved every moment of my stay.",
+    },
+    {
+      name: "Divya Rao",
+      profession: "Chef",
+      comment:
+        "As a chef, I enjoyed the local delicacies offered here. The service was excellent.",
+    },
   ];
   return (
     <>
@@ -36,17 +98,17 @@ const Home = ({ roomData }) => {
         />
       </Helmet>
       <div
-        className="h-screen bg-cover bg-center "
+        className="  bg-center bg-contain "
         style={{ backgroundImage: `url(${bg})` }}
       >
         <Header navOnly />
-        <section className="grid md:grid-cols-3 m-auto md:px-[13em] px-2 md:pt-28 pt-10  h-screen w-full ">
+        <section className="grid md:grid-cols-3 m-auto md:px-[13em] px-2 md:pt-28 pt-10  w-full ">
           <div className="flex flex-col md:col-span-2 col-span-3 justify-center md:items-start items-center w-full  md:w-[80%]">
-            <h4 className="text-orange-400 uppercase  text-xl my-2">
+            <h4 className="text-orange-400 uppercase  text-xl mt-10 md:mt-0 my-2">
               Its amazing
             </h4>
             <h1 className="text-amber-900 font-bold text-center md:text-start capitalize text-4xl my-2">
-              Enjoy a dream vacation in the hotel Trishul Regency
+              Enjoy a dream vacation in hotel Trishul Regency
             </h1>
             <h5 className="text-black text-justify text-lg my-2">
               Experience comfort, relaxation, and panoramic views that will make
@@ -171,9 +233,13 @@ const Home = ({ roomData }) => {
           style={{ backgroundImage: `url(${bg})` }}
         >
           <CommonCarousel>
-            {[...Array(3)].map((_, i) => (
+            {reviews.map((review, i) => (
               <div key={i} className="my-3">
-                <ReviewCard />
+                <ReviewCard
+                  name={review.name}
+                  profession={review.profession}
+                  comment={review.comment}
+                />
               </div>
             ))}
           </CommonCarousel>

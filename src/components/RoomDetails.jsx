@@ -15,7 +15,7 @@ import Loader from "./Loader";
 import Header from "./Header";
 import { Helmet } from "react-helmet";
 import bgVerticle from "../assets/bgVertical.jpg";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ImageGrid from "./common/ImageGrid";
 
 const RoomDetails = () => {
@@ -48,11 +48,15 @@ const RoomDetails = () => {
     switch (facility) {
       case "Deluxe Bed":
         return <IoBedOutline size={25} />;
-      case "Luxury Wash Room":
+      case "King Size Bed":
+        return <IoBedOutline size={25} />;
+      case "Wash Room":
         return <LiaToiletSolid size={25} />;
       case "Free Wifi":
         return <MdWifi size={25} />;
-      case "Balcony":
+      case "Common Balcony":
+        return <MdOutlineBalcony size={25} />;
+      case "Personal Balcony":
         return <MdOutlineBalcony size={25} />;
       case "Restaurant Service":
         return <RiRestaurant2Line size={25} />;
@@ -93,7 +97,7 @@ const RoomDetails = () => {
           content={
             room
               ? `${room.description}. Book now to experience ${room.heading}!`
-              : "Explore our available rooms and book your stay at The Trishul Regency ."
+              : "Explore our available rooms and book your stay at Hotel Trishul Regency ."
           }
         />
         {room && (
@@ -114,9 +118,9 @@ const RoomDetails = () => {
                 style={{ backgroundImage: `url(${bgVerticle})` }}
               >
                 <div className="grid grid-cols-5 w-full">
-                  <div className="md:col-span-3 col-span-5  flex flex-col justify-center items-center">
+                  <div className="md:col-span-3 col-span-5  flex flex-col justify-start items-center">
                     <div className="flex justify-between items-center w-full md:mb-5">
-                      <h1 className="font-bold capitalize my-[1em] md:my-0 text-4xl ">
+                      <h1 className="font-bold capitalize my-[1em] md:my-0 text-2xl md:text-4xl ">
                         {room?.heading}
                       </h1>
                       <div className="flex flex-col justify-center items-center">
@@ -127,11 +131,15 @@ const RoomDetails = () => {
                         <p className="text-xs">Reviews</p>
                       </div>
                     </div>
-                    <img src={room?.image} alt="room" className="w-full" />
-                    <div className="flex justify-evenly items-center border p-2 w-full mt-5">
+                    <img
+                      src={room?.image}
+                      alt="room"
+                      className="w-full h-[40%]"
+                    />
+                    <div className="flex justify-evenly items-center border border-orange-500 p-2 w-full mt-5">
                       <div className="flex flex-col justify-center items-center border border-s-0 border-t-0 border-b-0 border-e-gray-400  md:px-5  w-full">
                         <BsTextarea size={25} />
-                        <span className="text-[0.8em]">25 Sf</span>
+                        <span className="text-[0.8em]">{room?.length}</span>
                       </div>
                       <div className="flex flex-col justify-center items-center border border-s-0 border-t-0 border-b-0 border-e-gray-400 md:px-5  w-full">
                         <IoPeopleCircleOutline size={25} />
@@ -154,7 +162,7 @@ const RoomDetails = () => {
                     </div>
                     <div className="flex flex-col justify-center items-start w-full mt-4">
                       <p className="font-bold capitalize">Facilites</p>
-                      <div className=" border mt-2 ">
+                      <div className=" border border-orange-500 mt-2 ">
                         {room && room.facility && (
                           <div className="flex  justify-center items-start w-full mt-4">
                             {room.facility.map((facility, index) => (
