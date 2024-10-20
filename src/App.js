@@ -8,6 +8,7 @@ import Checkout from "./components/Checkout.jsx";
 import About from "./components/About.jsx";
 import Contact from "./components/Contact.jsx";
 import Profile from "./components/Profile.jsx";
+import Maintenance from "./components/Maintenance.jsx";
 import Navigators from "./components/Navigators.jsx";
 import Admin from "./components/Admin.jsx";
 import { ToastContainer } from "react-toastify";
@@ -32,15 +33,16 @@ function App() {
         <RoomProvider>
           <BrowserRouter basename="/">
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/rooms" element={<Rooms />} />
+              {/* <Route path="/" element={<Home />} /> */}
+              <Route path="/" element={<Maintenance />} />
+              {/* <Route path="/rooms" element={<Rooms />} />
               <Route path="/booking/:roomName" element={<Booking />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/room/:nameId" element={<RoomDetails />} />
               <Route path="/checkout/:roomName" element={<Checkout />} />
               <Route path="/profile/:id" element={<Profile />} />
-              <Route path="/admin/" element={<Admin />} />
+              <Route path="/admin/" element={<Admin />} /> */}
             </Routes>
             <Navigators />
             <ToastContainer
