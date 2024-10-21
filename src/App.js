@@ -44,7 +44,7 @@ function App() {
               <Route path="/profile/:id" element={<Profile />} />
               <Route path="/admin/" element={<Admin />} /> */}
             </Routes>
-            <Navigators />
+            {/* <Navigators /> */}
             <ToastContainer
               position="top-center"
               autoClose={3000}
