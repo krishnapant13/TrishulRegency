@@ -1,26 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FaQuoteLeft, FaStar, FaUserCircle } from "react-icons/fa";
-const ReviewCard = ({ name, profession, comment }) => {
-  const [stars, setStars] = useState(5);
-  useEffect(() => {
-    const randomStars = Math.floor(Math.random() * (5 - 3 + 1)) + 3;
-    setStars(randomStars);
-  }, []);
 
+const ReviewCard = ({ guestName, avatar, roomName, rating, reviewText }) => {
   return (
-    <div className="bg-white p-6 shadow-lg rounded-lg flex  flex-col justify-center items-center max-w-md mx-4 ">
-      <FaQuoteLeft className=" text-amber-800 mb-4" size={30} />
+    <div className="bg-white p-6 shadow-lg rounded-lg flex flex-col justify-center items-center max-w-md mx-4 transition-transform duration-300 hover:scale-105">
+      <FaQuoteLeft className="text-amber-800 mb-4" size={30} />
       <div className="flex items-center mb-4">
-        {[...Array(stars)].map((_, i) => (
+        {[...Array(rating)].map((_, i) => (
           <FaStar key={i} className="text-yellow-500" />
         ))}
+        {[...Array(5 - rating)].map((_, i) => (
+          <FaStar key={i} className="text-gray-300" />
+        ))}
       </div>
-      <p className="text-gray-600 mb-6 w-full text-center">{comment}</p>
+      <p className="text-gray-600 mb-4 w-full text-center">{reviewText}</p>
       <div className="flex items-center">
-        <FaUserCircle className="text-4xl text-gray-400 mr-4" />
+        <img
+          src={avatar}
+          alt={`${guestName}'s avatar`}
+          className="w-12 h-12 rounded-full mr-4 border-2 border-gray-300"
+        />
         <div className="flex flex-col">
-          <p className="font-bold text-gray-800">{name}</p>
-          <p className="text-gray-500">{profession}</p>
+          <p className="font-bold text-gray-800">{guestName}</p>
+          <p className="text-gray-500 italic">{roomName}</p>
         </div>
       </div>
     </div>

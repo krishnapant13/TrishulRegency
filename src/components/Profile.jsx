@@ -9,6 +9,12 @@ import { AuthContext } from "./common/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { server } from "../server";
 import axios from "axios";
+import {
+  MdArrowCircleUp,
+  MdArrowDropDown,
+  MdArrowUpward,
+} from "react-icons/md";
+import { IoArrowDownCircle, IoArrowUpCircle } from "react-icons/io5";
 const Profile = () => {
   const { id } = useParams(); // Get the user ID from the URL params
   const [user, setUser] = useState(null);
@@ -16,6 +22,39 @@ const Profile = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
   const [activeAccordion, setActiveAccordion] = useState(null);
+  const [selectedRating, setSelectedRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
+  const [rating, setRating] = useState(0);
+  const [reviewText, setReviewText] = useState("");
+  const [isReviewBoxOpen, setIsReviewBoxOpen] = useState({});
+
+  const toggleReviewBox = (index) => {
+    setIsReviewBoxOpen((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
+  const Star = ({ filled, onClick, onMouseEnter, onMouseLeave }) => {
+    return (
+      <svg
+        onClick={onClick}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6 cursor-pointer"
+        fill={filled ? "orange" : "none"}
+        viewBox="0 0 24 24"
+        stroke="orange"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l2.18 6.725h7.065c.969 0 1.371 1.24.588 1.81l-5.707 4.147 2.18 6.725c.3.922-.755 1.688-1.54 1.167L12 18.347l-5.707 4.147c-.784.521-1.838-.245-1.54-1.167l2.18-6.725-5.707-4.147c-.784-.571-.381-1.81.588-1.81h7.065l2.18-6.725z"
+        />
+      </svg>
+    );
+  };
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -57,7 +96,6 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Updating user details:", formData);
       setFormData({
         firstName: "",
         lastName: "",
@@ -69,12 +107,38 @@ const Profile = () => {
       console.error("Error updating user details:", error);
     }
   };
+  const handleStarClick = (starRating) => {
+    setSelectedRating(starRating); // Set the selected rating value
+    setRating(starRating); // Also set the rating for submission
+  };
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const submitReview = async (roomId) => {
+    try {
+      const response = await axios.post(
+        `${server}/review/add-review/${roomId}`,
+        { rating, reviewText },
+        config
+      );
+      setReviewText("");
+      setIsReviewBoxOpen(false);
+    } catch (error) {
+      console.error("Error submitting review:", error);
+    }
+  };
 
   return (
     <div>
       <Header navOnly />
       <div className=" flex flex-col justify-center items-center pt-20">
-        <p className="text-2xl w-[80%] hidden md:block text-start font-bold">User Profile</p>
+        <p className="text-2xl w-[80%] hidden md:block text-start font-bold">
+          User Profile
+        </p>
         <div className="w-full flex flex-col md:flex-row justify-evenly items-center p-4 bg-white">
           <div className="flex mb-4 flex-col justify-center items-center">
             {/* <div className="relative"> */}
@@ -211,109 +275,183 @@ const Profile = () => {
           <h2 className="text-lg font-semibold mb-4">Booking Details</h2>
 
           {user?.bookedRooms?.length >= 1 ? (
-            user.bookedRooms.map((room, index) => (
-              <div
-                key={index}
-                className="accordion border border-orange-500 rounded-lg mb-4 w-full"
-              >
-                <h2 className="accordion-header mb-0">
-                  <button
-                    className="accordion-button collapsed w-full text-left p-4 bg-gray-100 hover:bg-gray-200 focus:outline-none"
-                    type="button"
-                    onClick={() => toggleAccordion(index)}
-                  >
-                    <div className="flex justify-between items-center w-full">
-                      <span className="font-semibold">
-                        {room?.bookingDetails?.room?.heading} -{" "}
-                        {room?.bookingDetails?.room?.subheading}
-                      </span>
-                      <span className="text-black">
-                        {new Date(
-                          room.bookingDetails?.checkInDate
-                        ).toLocaleDateString()}{" "}
-                        to{" "}
-                        {new Date(
-                          room.bookingDetails?.checkOutDate
-                        ).toLocaleDateString()}
-                      </span>
-                      <span>{activeAccordion === index ? "-" : "+"}</span>
-                    </div>
-                  </button>
-                </h2>
-                {activeAccordion === index && (
-                  <div className="accordion-body p-4 bg-white rounded-b-lg duration-300 ease-linear">
-                    <table className="min-w-full table-auto border-collapse border border-orange-500">
-                      <thead className="bg-gray-200">
-                        <tr>
-                          <th className="border border-orange-500 px-4 py-2 text-left">
-                            Category
-                          </th>
-                          <th className="border border-orange-500 px-4 py-2 text-left">
-                            Details
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td className="border border-orange-500 px-4 py-2">
-                            Guests
-                          </td>
-                          <td className="border border-orange-500 px-4 py-2">
-                            {room.bookingDetails?.guestCount}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="border border-orange-500 px-4 py-2">
-                            Room Price
-                          </td>
-                          <td className="border border-orange-500 px-4 py-2">
-                            ₹{room.bookingDetails?.room?.price}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="border border-orange-500 px-4 py-2">
-                            Calculated Price
-                          </td>
-                          <td className="border border-orange-500 px-4 py-2">
-                            ₹{room.bookingDetails?.calculatedPrice}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="border border-orange-500 px-4 py-2">
-                            Meals Included
-                          </td>
-                          <td className="border border-orange-500 px-4 py-2">
-                            <ul className="list-disc list-inside">
-                              {Object.entries(room.bookingDetails?.meals)
-                                .filter(([key, value]) => value.isChecked)
-                                .map(([key, value]) => (
-                                  <li key={key}>
-                                    {value.name}: ₹{value.price}
-                                  </li>
+            user.bookedRooms
+              .sort(
+                (a, b) =>
+                  new Date(b.bookingDetails?.checkOutDate) -
+                  new Date(a.bookingDetails?.checkOutDate)
+              )
+              .map((room, index) => (
+                <div
+                  key={index}
+                  className="accordion border border-orange-500 rounded-lg mb-4 w-full"
+                >
+                  <h2 className="accordion-header mb-0">
+                    <button
+                      className="accordion-button collapsed w-full text-left p-4 bg-gray-100 hover:bg-gray-200 focus:outline-none cursor-default"
+                      type="button"
+                    >
+                      <div className="flex justify-between items-center w-full">
+                        <span className="font-semibold">
+                          {room?.bookingDetails?.room?.heading} -{" "}
+                          {room?.bookingDetails?.room?.subheading}
+                        </span>
+                        <span className="text-black">
+                          {new Date(
+                            room.bookingDetails?.checkInDate
+                          ).toLocaleDateString()}{" "}
+                          to{" "}
+                          {new Date(
+                            room.bookingDetails?.checkOutDate
+                          ).toLocaleDateString()}
+                        </span>
+                        {/* add stars here */}
+                        {!isReviewBoxOpen[index] && (
+                          <button
+                            onClick={() => toggleReviewBox(index)}
+                            className={`${
+                              new Date(room.bookingDetails?.checkOutDate) >
+                              new Date()
+                                ? "bg-gray-500"
+                                : "bg-orange-500"
+                            } text-white py-2 px-4 mt-2 rounded`}
+                            disabled={
+                              new Date(room.bookingDetails?.checkOutDate) >
+                              new Date()
+                            }
+                          >
+                            Add Review
+                          </button>
+                        )}
+                        {isReviewBoxOpen[index] && (
+                          <div className="mt-4 flex justify-center items-center">
+                            <div className="flex flex-col justify-center items-start">
+                              <div className="flex items-center justify-center mb-4">
+                                {[1, 2, 3, 4, 5].map((star, index) => (
+                                  <Star
+                                    key={index}
+                                    filled={
+                                      hoverRating >= star ||
+                                      selectedRating >= star
+                                    }
+                                    onClick={() => handleStarClick(star)}
+                                    onMouseEnter={() => setHoverRating(star)}
+                                    onMouseLeave={() => setHoverRating(0)}
+                                  />
                                 ))}
-                            </ul>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="border border-orange-500 px-4 py-2">
-                            Room Facilities
-                          </td>
-                          <td className="border border-orange-500 px-4 py-2">
-                            <ul className="list-disc list-inside">
-                              {room.bookingDetails?.room.facility.map(
-                                (facility, i) => (
-                                  <li key={i}>{facility}</li>
-                                )
-                              )}
-                            </ul>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-              </div>
-            ))
+                              </div>
+
+                              <textarea
+                                value={reviewText}
+                                onChange={(e) => setReviewText(e.target.value)}
+                                placeholder="Write your review here"
+                                className="w-full p-2 border border-orange-500 rounded"
+                                required
+                              />
+                            </div>
+
+                            <button
+                              onClick={() =>
+                                submitReview(room?.bookingDetails?.room?._id)
+                              }
+                              className={`py-2 px-4 ms-6 rounded ${
+                                reviewText.trim()
+                                  ? "bg-orange-500 text-white cursor-pointer"
+                                  : "bg-gray-400 text-white cursor-not-allowed"
+                              }`}
+                              disabled={!reviewText.trim()} // Disable button if no text
+                            >
+                              Submit Review
+                            </button>
+                          </div>
+                        )}
+                        <span
+                          className=" cursor-pointer "
+                          onClick={() => toggleAccordion(index)}
+                        >
+                          {activeAccordion === index ? (
+                            <IoArrowUpCircle size={45} />
+                          ) : (
+                            <IoArrowDownCircle size={45} />
+                          )}
+                        </span>
+                      </div>
+                    </button>
+                  </h2>
+                  {activeAccordion === index && (
+                    <div className="accordion-body p-4 bg-white rounded-b-lg duration-300 ease-linear">
+                      <table className="min-w-full table-auto border-collapse border border-orange-500">
+                        <thead className="bg-gray-200">
+                          <tr>
+                            <th className="border border-orange-500 px-4 py-2 text-left">
+                              Category
+                            </th>
+                            <th className="border border-orange-500 px-4 py-2 text-left">
+                              Details
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="border border-orange-500 px-4 py-2">
+                              Guests
+                            </td>
+                            <td className="border border-orange-500 px-4 py-2">
+                              {room.bookingDetails?.guestCount}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="border border-orange-500 px-4 py-2">
+                              Room Price
+                            </td>
+                            <td className="border border-orange-500 px-4 py-2">
+                              ₹{room.bookingDetails?.room?.price}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="border border-orange-500 px-4 py-2">
+                              Calculated Price
+                            </td>
+                            <td className="border border-orange-500 px-4 py-2">
+                              ₹{room.bookingDetails?.calculatedPrice}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="border border-orange-500 px-4 py-2">
+                              Meals Included
+                            </td>
+                            <td className="border border-orange-500 px-4 py-2">
+                              <ul className="list-disc list-inside">
+                                {Object.entries(room.bookingDetails?.meals)
+                                  .filter(([key, value]) => value.isChecked)
+                                  .map(([key, value]) => (
+                                    <li key={key}>
+                                      {value.name}: ₹{value.price}
+                                    </li>
+                                  ))}
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="border border-orange-500 px-4 py-2">
+                              Room Facilities
+                            </td>
+                            <td className="border border-orange-500 px-4 py-2">
+                              <ul className="list-disc list-inside">
+                                {room.bookingDetails?.room.facility.map(
+                                  (facility, i) => (
+                                    <li key={i}>{facility}</li>
+                                  )
+                                )}
+                              </ul>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </div>
+              ))
           ) : (
             <p>No Rooms Booked Currently</p>
           )}

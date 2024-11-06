@@ -4,10 +4,12 @@ import whiteLogo from "../assets/TerracePeaksWhite.png";
 import blackLogo from "../assets/TrishulRegency.png";
 import noUser from "../assets/noUser.jpeg";
 import { useSelector } from "react-redux";
+import Login from "./Login";
 
 const Header = ({ name, navOnly, description }) => {
   const [scrolled, setScrolled] = useState(false);
   const isLogIn = localStorage.getItem("token");
+  const [showModal, setShowModal] = useState(false);
   const user = useSelector((state) => state?.user?.userDetails);
 
   useEffect(() => {
@@ -94,6 +96,7 @@ const Header = ({ name, navOnly, description }) => {
             src={user && isLogIn ? user.avatar : noUser}
             alt="No User"
             className="bg-cover bg-center w-full h-full"
+            onClick={()=> !isLogIn ? setShowModal(true) : "" }
           />
         </Link>
       </div>
@@ -107,6 +110,7 @@ const Header = ({ name, navOnly, description }) => {
           </p>
         </div>
       )}
+      {showModal && <Login setShowModal={setShowModal} />}
     </header>
   );
 };

@@ -8,17 +8,17 @@ const NewsLetter = () => {
         className="bg-cover bg-center h-fit p-10 w-full flex flex-col justify-center items-center "
         style={{
           backgroundImage:
-            "url('https://res.cloudinary.com/dutkerqvn/image/upload/v1726290441/Room_urvbrx.jpg')",
+            "url('https://res.cloudinary.com/dutkerqvn/image/upload/v1727935118/hsyiuwucfxplnzrwqdn7.jpg')",
         }}
         aria-hidden="true"
       >
-        <p className="text-white tracking-widest capitalize">
+        <p className=" tracking-widest capitalize">
           Get updates regularly
         </p>
-        <h2 className="font-bold tracking-widest capitalize text-2xl text-white mb-4 text-center  ">
+        <h2 className="font-bold tracking-widest capitalize text-2xl mb-4 text-center  ">
           Subscribe to our newsletter
         </h2>
-        <p className="text-white tracking-widest capitalize text-center">
+        <p className=" tracking-widest capitalize text-center">
           Elevate Your Stay Amidst Nature's Beauty
         </p>
         <div className="relative md:w-[50%] w-[90%]">

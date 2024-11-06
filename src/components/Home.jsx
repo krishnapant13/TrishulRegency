@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import NewsLetter from "./NewsLetter";
 import Footer from "./Footer";
@@ -13,6 +13,8 @@ import bg from "../assets/Snapseed.jpg";
 import ReviewCard from "./common/ReviewCard";
 import CommonCarousel from "./common/CommonCarousel";
 import { Helmet } from "react-helmet";
+import { server } from "../server";
+import axios from "axios";
 
 const Home = ({ roomData }) => {
   // useEffect(() => {
@@ -27,67 +29,20 @@ const Home = ({ roomData }) => {
     "https://res.cloudinary.com/dutkerqvn/image/upload/v1727934267/IMG_8864_f64zan.jpg",
     "https://res.cloudinary.com/dutkerqvn/image/upload/v1727934558/tsaubq1j0ybf8wmia1k7.jpg",
   ];
-  const reviews = [
-    {
-      name: "Amit Sharma",
-      profession: "Software Engineer",
-      comment:
-        "Amazing stay! The views were breathtaking, and the service was impeccable.",
-    },
-    {
-      name: "Priya Mehta",
-      profession: "Doctor",
-      comment:
-        "A peaceful getaway with fantastic amenities. Highly recommend Trishul Regency.",
-    },
-    {
-      name: "Rahul Verma",
-      profession: "Business Analyst",
-      comment:
-        "Luxurious rooms with beautiful surroundings. Perfect for a relaxing vacation.",
-    },
-    {
-      name: "Anjali Singh",
-      profession: "Interior Designer",
-      comment:
-        "Loved the ambiance and the hospitality. I will definitely come back!",
-    },
-    {
-      name: "Vikram Patel",
-      profession: "Entrepreneur",
-      comment: "Great service and a perfect place to unwind in nature.",
-    },
-    {
-      name: "Neha Kapoor",
-      profession: "Teacher",
-      comment:
-        "The hotel is well-maintained with friendly staff. A memorable experience!",
-    },
-    {
-      name: "Rajesh Gupta",
-      profession: "Photographer",
-      comment:
-        "Stunning views and excellent facilities. Perfect for a photography retreat.",
-    },
-    {
-      name: "Radhika Iyer",
-      profession: "Writer",
-      comment:
-        "A perfect spot to find inspiration. The surroundings are serene and beautiful.",
-    },
-    {
-      name: "Suresh",
-      profession: "Architect",
-      comment:
-        "The rooms are spacious and well-designed. Loved every moment of my stay.",
-    },
-    {
-      name: "Divya Rao",
-      profession: "Chef",
-      comment:
-        "As a chef, I enjoyed the local delicacies offered here. The service was excellent.",
-    },
-  ];
+  const [reviews, setReviews] = useState([]);
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await axios.get(`${server}/review/all-reviews`);
+        setReviews(response.data);
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+      }
+    };
+
+    fetchReviews();
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -236,9 +191,12 @@ const Home = ({ roomData }) => {
             {reviews.map((review, i) => (
               <div key={i} className="my-3">
                 <ReviewCard
-                  name={review.name}
-                  profession={review.profession}
-                  comment={review.comment}
+                  key={review._id}
+                  guestName={review.guestName}
+                  avatar={review.avatar}
+                  roomName={review.roomName}
+                  rating={review.rating}
+                  reviewText={review.reviewText}
                 />
               </div>
             ))}

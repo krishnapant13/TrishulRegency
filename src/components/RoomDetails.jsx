@@ -123,13 +123,6 @@ const RoomDetails = () => {
                       <h1 className="font-bold capitalize my-[1em] md:my-0 text-2xl md:text-4xl ">
                         {room?.heading}
                       </h1>
-                      <div className="flex flex-col justify-center items-center">
-                        <div className="flex justify-center items-center">
-                          <CiStar /> <CiStar /> <CiStar /> <CiStar /> <CiStar />{" "}
-                          <CiStar />
-                        </div>
-                        <p className="text-xs">Reviews</p>
-                      </div>
                     </div>
                     <img
                       src={room?.image}

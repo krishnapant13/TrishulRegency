@@ -31,20 +31,20 @@ function App() {
     >
       <AuthProvider>
         <RoomProvider>
-          <BrowserRouter basename="/">
+          <BrowserRouter basename="/TrishulRegency">
             <Routes>
-              {/* <Route path="/" element={<Home />} /> */}
-              <Route path="/" element={<Maintenance />} />
-              {/* <Route path="/rooms" element={<Rooms />} />
+              <Route path="/" element={<Home />} />
+              {/* <Route path="/" element={<Maintenance />} /> */}
+              <Route path="/rooms" element={<Rooms />} />
               <Route path="/booking/:roomName" element={<Booking />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/room/:nameId" element={<RoomDetails />} />
               <Route path="/checkout/:roomName" element={<Checkout />} />
               <Route path="/profile/:id" element={<Profile />} />
-              <Route path="/admin/" element={<Admin />} /> */}
+              <Route path="/admin/" element={<Admin />} />
             </Routes>
-            {/* <Navigators /> */}
+            <Navigators />
             <ToastContainer
               position="top-center"
               autoClose={3000}

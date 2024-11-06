@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./common/AuthContext";
 import { toast } from "react-toastify";
 import Loader from "./Loader";
+import CryptoJS, { enc } from "crypto-js";
 
 const Login = ({ setShowModal }) => {
   const [signUpClick, setSignUpClick] = useState(false);
@@ -40,13 +41,24 @@ const Login = ({ setShowModal }) => {
     e.preventDefault();
     try {
       setLoading(true);
-      await login(formData).then(() => {
-        setLoading(false);
-        setShowModal(false);
-      });
+      const encryptedEmail = CryptoJS.AES.encrypt(
+        formData.email,
+        process.env.REACT_APP_ENCRYPTION_KEY
+      ).toString();
+      const encryptedPassword = CryptoJS.AES.encrypt(
+        formData.password,
+        process.env.REACT_APP_ENCRYPTION_KEY
+      ).toString();
+      await login({ email: encryptedEmail, password: encryptedPassword }).then(
+        () => {
+          setLoading(false);
+          setShowModal(false);
+        }
+      );
     } catch (error) {
+      setLoading(false)
       console.error(error);
-      toast.error(error);
+      toast.error("Something Went Wrong");
     }
   };
 
