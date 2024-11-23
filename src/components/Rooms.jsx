@@ -129,7 +129,7 @@ const Rooms = () => {
           name="Rooms"
           description="Explore our range of comfortable, elegant rooms designed for your perfect getaway"
         />
-        <div className="z-50 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[95%] md:w-[55%] lg:w-[80%] h-[15vh] lg:h-[8vh] xl:h-[15vh] xl:w-[55%] bg-black shadow-xl flex justify-center items-center">
+        <div className="z-30 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[95%] md:w-[55%] lg:w-[80%] h-[15vh] lg:h-[8vh] xl:h-[15vh] xl:w-[55%] bg-black shadow-xl flex justify-center items-center">
           <div className=" flex flex-col justify-center items-center bg-white w-[80%] h-full">
             <p className=" text-[0.5em] font-bold text-gray-500 w-full text-start pl-5 uppercase">
               check in

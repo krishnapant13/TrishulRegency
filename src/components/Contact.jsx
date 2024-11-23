@@ -56,8 +56,8 @@ const Contact = () => {
             <h3 className="font-bold text-xl">Email</h3>
             <p className="text-center">
               {" "}
-              <a href={`mailto:${"example@example.com"}`}>
-                {"example@example.com"}
+              <a href={`mailto:${"trishulregency@gmail.com"}`}>
+                {"trishulregency@gmail.com"}
               </a>
             </p>
           </article>

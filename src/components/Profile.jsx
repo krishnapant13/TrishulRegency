@@ -1,22 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import Ticket from "./common/Ticket";
 import noUser from "../assets/noUser.jpeg";
-import { useSelector } from "react-redux";
 import Header from "./Header";
-import { BsPencilFill } from "react-icons/bs";
-import Button from "./Button";
 import { AuthContext } from "./common/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { server } from "../server";
 import axios from "axios";
 import {
-  MdArrowCircleUp,
   MdArrowDropDown,
-  MdArrowUpward,
+  MdArrowDropUp,
 } from "react-icons/md";
-import { IoArrowDownCircle, IoArrowUpCircle } from "react-icons/io5";
 const Profile = () => {
-  const { id } = useParams(); // Get the user ID from the URL params
+  const { id } = useParams();
   const [user, setUser] = useState(null);
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -292,10 +286,10 @@ const Profile = () => {
                       type="button"
                     >
                       <div className="flex justify-between items-center w-full">
-                        <span className="font-semibold">
-                          {room?.bookingDetails?.room?.heading} -{" "}
-                          {room?.bookingDetails?.room?.subheading}
-                        </span>
+                        <p className="font-semibold">
+                          {room?.bookingDetails?.room?.heading} <span className="hidden md:block">-{" "}
+                          {room?.bookingDetails?.room?.subheading}</span>
+                        </p>
                         <span className="text-black">
                           {new Date(
                             room.bookingDetails?.checkInDate
@@ -314,7 +308,7 @@ const Profile = () => {
                               new Date()
                                 ? "bg-gray-500"
                                 : "bg-orange-500"
-                            } text-white py-2 px-4 mt-2 rounded`}
+                            } text-white py-2 px-2 md:px-4 mt-2 rounded text-sm md:text-base`}
                             disabled={
                               new Date(room.bookingDetails?.checkOutDate) >
                               new Date()
@@ -370,9 +364,9 @@ const Profile = () => {
                           onClick={() => toggleAccordion(index)}
                         >
                           {activeAccordion === index ? (
-                            <IoArrowUpCircle size={45} />
+                            <MdArrowDropUp size={45} />
                           ) : (
-                            <IoArrowDownCircle size={45} />
+                            <MdArrowDropDown size={45} />
                           )}
                         </span>
                       </div>
