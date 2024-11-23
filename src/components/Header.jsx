@@ -86,7 +86,7 @@ const Header = ({ name, navOnly, description }) => {
             <Link to="/contact">Contact</Link>
           </li>
         </ul>
-        <Link
+        {/* <Link
           to={isLogIn && user ? `/profile/${user?._id}` : ""}
           className={`w-10 h-10 rounded-full overflow-hidden md:mr-10 md:ml-0 ml-16 ${
             isLogIn ? "shadow-xl  cursor-pointer" : "cursor-default "
@@ -98,7 +98,7 @@ const Header = ({ name, navOnly, description }) => {
             className="bg-cover bg-center w-full h-full"
             onClick={()=> !isLogIn ? setShowModal(true) : "" }
           />
-        </Link>
+        </Link> */}
       </div>
       {!navOnly && (
         <div className="flex flex-col justify-center items-center h-full">
