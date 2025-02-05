@@ -2,16 +2,16 @@ import React from "react";
 
 const ImageGrid = () => {
   const images = [
-    "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
-    "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
-    "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
-    "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
-    "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
-    "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
-    "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
-    "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
-    "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
-    "https://res.cloudinary.com/dutkerqvn/image/upload/v1714721348/IMG_5302_vikv0t.jpg",
+"https://res.cloudinary.com/dutkerqvn/image/upload/v1738740994/Grid%20Images/8_qmqxgt.webp",
+"https://res.cloudinary.com/dutkerqvn/image/upload/v1738740993/Grid%20Images/10_ce4tfs.webp",
+"https://res.cloudinary.com/dutkerqvn/image/upload/v1738740989/Grid%20Images/9_m64knj.webp",
+"https://res.cloudinary.com/dutkerqvn/image/upload/v1738740987/Grid%20Images/6_wemngf.webp",
+"https://res.cloudinary.com/dutkerqvn/image/upload/v1738740985/Grid%20Images/5_esoddy.webp",
+"https://res.cloudinary.com/dutkerqvn/image/upload/v1738740980/Grid%20Images/4_xql9z0.webp",
+"https://res.cloudinary.com/dutkerqvn/image/upload/v1738740976/Grid%20Images/2_lbohbu.webp",
+"https://res.cloudinary.com/dutkerqvn/image/upload/v1738740974/Grid%20Images/7_tjoplo.webp",
+"https://res.cloudinary.com/dutkerqvn/image/upload/v1738740966/Grid%20Images/3_bo0fzl.webp",
+"https://res.cloudinary.com/dutkerqvn/image/upload/v1738740961/Grid%20Images/1_v34aef.webp",
   ];
 
   const gridItems = images.map((img, index) => {

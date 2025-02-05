@@ -117,17 +117,20 @@ const BookNowPallet = ({ bookingDetails, room, button }) => {
   return (
     <section className="flex flex-col justify-center items-center w-full">
       <div className="mt-5 py-10 md:w-[90%] w-full bg-orange-100 flex flex-col justify-center items-center md:mt-1">
-        <p className="font-extrabold text-center w-full text-2xl">Booking Details</p>
+        <p className="font-extrabold text-center w-full text-2xl">
+          Booking Details
+        </p>
         <p>Sub Total</p>
         <p className="text-2xl font-bold mb-3">₹ {calculateTotalPrice()}</p>
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            if (isLogIn) {
-              handleSubmit(e);
-            } else {
-              setShowModal(true);
-            }
+            handleSubmit(e);
+            // if (isLogIn) {
+
+            // } else {
+            //   setShowModal(true);
+            // }
           }}
           className="w-full flex flex-col justify-center items-center"
         >
